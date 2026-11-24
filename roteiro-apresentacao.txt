@@ -1,0 +1,65 @@
+ROTEIRO DE APRESENTAÇÃO — VCO BARBEARIA
+Tempo total: cerca de 10 minutos (aprox. 3 min por pessoa)
+
+ANTES DE COMEÇAR
+- Rodar "npm run dev" na pasta frontend-barbearia e abrir http://localhost:3000
+- Entrar como barbeiro > Configurações > "Restaurar dados da demonstração"
+- Sair e deixar a tela de login aberta
+
+=====================================================================
+PESSOA 1 — Introdução e área do cliente
+=====================================================================
+Falar:
+- O problema: barbearias que agendam por WhatsApp e caderno perdem horários,
+  não controlam faltas e não sabem quanto faturam de verdade.
+- A proposta: um sistema com dois perfis, cliente e barbeiro (dono).
+- É um protótipo: os dados são fictícios e ficam salvos no navegador.
+
+Mostrar:
+1. Clicar em "Entrar como Cliente (demo)".
+2. Vitrine: serviços com preço e duração, equipe, horário de funcionamento
+   e botão do WhatsApp.
+3. Card de fidelidade: "Falta só 1 corte para ganhar 20% de desconto".
+4. Agendar: Corte + Barba > Qualquer barbeiro > Hoje ou amanhã > um horário > Pix.
+5. No resumo, clicar em "Pagar e confirmar" > "Simular pagamento aprovado".
+6. Abrir "Meus horários": o status está "Aguardando confirmação".
+
+Passar a palavra: "Agora vamos ver o que acontece do lado do barbeiro."
+
+=====================================================================
+PESSOA 2 — Área do barbeiro (agenda)
+=====================================================================
+Mostrar:
+1. Clicar em "Trocar perfil" (no topo): entra como Carlos, o dono.
+2. Agenda: o aviso "novo agendamento pelo app" e o selo "Novo".
+3. Visão Dia (uma coluna por barbeiro) e visão Semana.
+4. Abrir o agendamento do João: serviços, valor, pagamento,
+   botões WhatsApp (mensagem pronta) e Ligar.
+5. Clicar em "Confirmar" e depois em "Concluir atendimento".
+6. Citar as outras ações: remarcar, cancelar, não compareceu,
+   bloquear horário e agendamento manual.
+7. "Trocar perfil" de volta para o cliente:
+   - o atendimento aparece como "Concluído";
+   - a Fidelidade mostra "Você ganhou 20% de desconto!".
+8. (Opcional) Começar um novo agendamento para mostrar o desconto
+   aplicado sozinho no resumo.
+
+Passar a palavra: "E com isso tudo, o dono consegue acompanhar o financeiro."
+
+=====================================================================
+PESSOA 3 — Gestão, financeiro e encerramento
+=====================================================================
+Mostrar:
+1. "Trocar perfil" para o barbeiro > Financeiro.
+2. Indicadores: faturamento (já com o atendimento que acabou de ser concluído),
+   ticket médio, lucro líquido, taxa de faltas e serviço mais vendido.
+3. Gráficos: faturamento por dia e por mês (comparando com o período anterior)
+   e ranking de barbeiros.
+4. Trocar entre Diário, Mensal e Anual, e filtrar por barbeiro.
+5. Passar rápido por Clientes (ficha e histórico), Serviços e Equipe.
+
+Falar (encerramento):
+- Tecnologias: Next.js, TypeScript e Tailwind.
+- Próximo passo: ligar no back-end com Spring Boot + MySQL.
+  As telas já foram separadas da camada de dados, então só essa camada muda.
+- Agradecer e abrir para perguntas.
