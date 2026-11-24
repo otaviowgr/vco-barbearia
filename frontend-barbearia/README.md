@@ -2,7 +2,9 @@
 
 Protótipo funcional de um sistema de agendamento e gestão para barbearia, feito para **apresentação**.
 
-- **Sem banco de dados e sem back-end:** todos os dados são fictícios e ficam salvos no navegador (localStorage).
+- **Dois modos de dados:**
+  - **demonstração (padrão):** os dados ficam no navegador (localStorage), sem precisar de servidor;
+  - **API:** os dados ficam no back-end Spring Boot + MySQL da pasta [`../backend-barbearia`](../backend-barbearia/). Veja "Modo API" abaixo.
 - **Os dois perfis compartilham os dados:** o que o cliente faz aparece para o barbeiro, e o contrário também.
 - **Mobile-first:** fica bem no celular e também no notebook ou projetor.
 
@@ -31,6 +33,26 @@ Os dados iniciais são carregados automaticamente na primeira vez que o site abr
 3. No celular, abra `http://SEU-IP:3000`, por exemplo `http://192.168.0.15:3000`.
 
 > Cada navegador ou dispositivo tem o seu próprio localStorage. Para a demonstração "cliente → barbeiro" funcionar, use o **mesmo navegador**. Funciona até em duas abas lado a lado: uma atualiza sozinha quando a outra muda algo.
+
+### Modo API (com o back-end Spring Boot)
+
+1. Suba a API (veja o [README do back-end](../backend-barbearia/README.md)). O jeito mais rápido, sem MySQL:
+   ```bash
+   cd ../backend-barbearia
+   mvnw.cmd spring-boot:run -Dspring-boot.run.profiles=dev
+   ```
+2. Rode o front-end apontando para ela:
+   ```bash
+   npm run dev:api
+   ```
+   Esse comando é um atalho para `NEXT_PUBLIC_API_URL=http://localhost:8080/api next dev`. Para outro endereço, crie um arquivo `.env.local` com `NEXT_PUBLIC_API_URL=...`.
+
+Neste modo:
+- os dados ficam no banco;
+- celular e computador veem as mesmas informações (as telas se atualizam a cada 10 segundos);
+- o botão "Restaurar dados da demonstração" recria os dados no servidor.
+
+Em **Configurações**, a tela mostra qual modo está ativo.
 
 ### Versão otimizada (opcional)
 
@@ -183,22 +205,26 @@ src/
 │  ├─ agenda/                calendário, grade de horários, remarcar
 │  ├─ cliente/               cards de serviço, agendamento, fidelidade, pagamento simulado
 │  └─ barbeiro/              timeline, detalhe do agendamento, modais, gráficos
-├─ services/                 "API" simulada (localStorage + atraso artificial)
+├─ services/                 acesso aos dados: versão local (localStorage) e remoto.ts (API Spring Boot)
 ├─ data/seed/                dados fictícios iniciais (gerados a partir da data de hoje)
 ├─ hooks/                    useApi (carrega dados e atualiza sozinho quando algo muda)
 ├─ lib/                      datas, formatadores, rótulos de status
 └─ types/                    tipos do domínio (Agendamento, Servico, Barbeiro...)
 ```
 
-### Trocar pelo back-end real (Spring Boot + MySQL)
+### Como o front-end conversa com o back-end
 
-As telas **nunca** acessam o localStorage diretamente. Elas só chamam as funções de `src/services`, que são `async` e imitam chamadas HTTP:
+As telas **nunca** acessam o localStorage nem fazem `fetch()` diretamente. Elas só chamam as funções de `src/services`, por exemplo:
 
 - `agendamentoService.criar()`;
-- `financeiroService.resumo()`;
-- e assim por diante.
+- `financeiroService.resumo()`.
 
-Para ligar no back-end, basta reescrever o corpo dessas funções com `fetch()` para a API REST, mantendo os mesmos nomes, parâmetros e tipos de retorno. Os tipos em `src/types` servem de contrato para as entidades e DTOs do Spring Boot.
+O arquivo `src/services/index.ts` escolhe a implementação:
+
+- **sem `NEXT_PUBLIC_API_URL`:** usa as versões locais, com localStorage e atraso simulado;
+- **com `NEXT_PUBLIC_API_URL`:** usa `src/services/remoto.ts`, que chama a API REST do Spring Boot.
+
+As duas versões têm **as mesmas assinaturas**, e o TypeScript confere isso. Os tipos em `src/types` são o contrato com os DTOs do back-end.
 
 ---
 

@@ -1,9 +1,17 @@
 # VCO Barbearia
 
-- **`frontend-barbearia/`** — protótipo navegável (Next.js + TypeScript + Tailwind) com dados simulados no navegador. Instruções, logins de demonstração e roteiro de apresentação estão em [`frontend-barbearia/README.md`](frontend-barbearia/README.md).
-- **`backend-barbearia/`** — reservado para a futura API (Spring Boot + MySQL).
+Sistema de agendamento e gestão para barbearia.
 
-Para rodar rápido:
+| Pasta | O que é | Detalhes |
+|---|---|---|
+| [`frontend-barbearia/`](frontend-barbearia/) | Interface web (Next.js + TypeScript + Tailwind) | [README](frontend-barbearia/README.md): logins de demonstração e roteiro de apresentação |
+| [`backend-barbearia/`](backend-barbearia/) | API REST (Spring Boot 4 + MySQL) | [README](backend-barbearia/README.md): como rodar, endpoints e modelo de dados |
+
+## Dois jeitos de rodar
+
+### 1. Só o front-end (modo demonstração)
+
+Os dados ficam no navegador. Não precisa de Java nem de banco de dados.
 
 ```bash
 cd frontend-barbearia
@@ -11,3 +19,32 @@ npm install
 npm run dev
 # abra http://localhost:3000
 ```
+
+### 2. Sistema completo (front-end + API + banco)
+
+Os dados ficam no banco de dados. Celular e computador veem as mesmas informações.
+
+Terminal 1, a API:
+
+```bash
+cd backend-barbearia
+mvnw.cmd spring-boot:run -Dspring-boot.run.profiles=dev   # H2 em memória (sem instalar nada)
+# ou, com MySQL:  $env:DB_PASSWORD="sua_senha"; mvnw.cmd spring-boot:run
+```
+
+Terminal 2, o front-end:
+
+```bash
+cd frontend-barbearia
+npm run dev:api
+# abra http://localhost:3000
+```
+
+Logins de demonstração:
+
+| Perfil | E-mail | Senha |
+|---|---|---|
+| Cliente | `cliente@demo.com` | `123456` |
+| Barbeiro | `barbeiro@demo.com` | `123456` |
+
+O roteiro da apresentação está em [`roteiro-apresentacao.txt`](roteiro-apresentacao.txt).

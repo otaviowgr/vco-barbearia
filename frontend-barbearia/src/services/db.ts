@@ -2,8 +2,8 @@
 // "Banco de dados" da demonstração, guardado no localStorage.
 // Só os arquivos em /services conhecem este módulo: as telas
 // conversam apenas com os serviços (que imitam uma API REST).
-// Para ligar no back-end real, troque a implementação dos
-// serviços por fetch() e este arquivo deixa de ser usado.
+// No modo API (NEXT_PUBLIC_API_URL definida) este arquivo não
+// é usado: os serviços chamam o back-end Spring Boot (remoto.ts).
 // =============================================================
 
 import type {
@@ -18,6 +18,9 @@ import type {
   Usuario,
 } from "@/types";
 import { gerarSeed } from "@/data/seed";
+import { ErroApi, esperar, EVENTO_DB } from "./nucleo";
+
+export { ErroApi, esperar, EVENTO_DB };
 
 export interface BancoDemo {
   config: ConfigBarbearia;
@@ -37,9 +40,6 @@ const PREFIXO = "vco:";
 const CHAVE_VERSAO = `${PREFIXO}versao`;
 /** Aumente quando mudar o formato do seed para forçar recarga. */
 const VERSAO_SEED = "1";
-
-/** Evento disparado (na mesma aba e em outras abas) quando algo muda. */
-export const EVENTO_DB = "vco:db-alterado";
 
 const TABELAS: Tabela[] = [
   "config",
@@ -139,21 +139,7 @@ export function restaurarDemo(manterSessao = true) {
 
 // ---------- utilitários de "API simulada" ----------
 
-export class ErroApi extends Error {
-  constructor(
-    message: string,
-    public status = 400,
-  ) {
-    super(message);
-    this.name = "ErroApi";
-  }
-}
-
 const LATENCIA = { min: 250, max: 600 };
-
-export function esperar(ms: number) {
-  return new Promise<void>((r) => setTimeout(r, ms));
-}
 
 /**
  * Executa uma operação como se fosse uma chamada HTTP:

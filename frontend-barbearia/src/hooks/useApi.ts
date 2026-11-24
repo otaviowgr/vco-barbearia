@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { EVENTO_DB } from "@/services";
+import { EVENTO_DB, USAR_API } from "@/services";
 
 /**
  * Executa uma chamada da "API" e mantém o resultado atualizado:
@@ -44,7 +44,15 @@ export function useApi<T>(fn: () => Promise<T>, deps: unknown[] = []) {
   useEffect(() => {
     const ouvir = () => executar(true);
     window.addEventListener(EVENTO_DB, ouvir);
-    return () => window.removeEventListener(EVENTO_DB, ouvir);
+    // No modo API, outros aparelhos (ex.: celular do cliente) também mudam os dados:
+    // atualiza em segundo plano a cada 10 s enquanto a aba estiver visível.
+    const timer = USAR_API
+      ? setInterval(() => document.visibilityState === "visible" && executar(true), 10_000)
+      : undefined;
+    return () => {
+      window.removeEventListener(EVENTO_DB, ouvir);
+      if (timer) clearInterval(timer);
+    };
   }, [executar]);
 
   return { dados, carregando, erro, recarregar: () => executar(true) };
