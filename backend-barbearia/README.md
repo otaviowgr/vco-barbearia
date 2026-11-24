@@ -1,4 +1,4 @@
-# VCO Barbearia — API (Spring Boot + MySQL)
+# VCO Barbearia — API (Spring Boot + H2 / MySQL)
 
 Back-end do sistema da VCO Barbearia. É uma API REST com as mesmas regras do protótipo:
 - agenda sem horários sobrepostos;
@@ -7,7 +7,7 @@ Back-end do sistema da VCO Barbearia. É uma API REST com as mesmas regras do pr
 - financeiro com comparação ao período anterior;
 - dados de demonstração gerados a partir da data de hoje.
 
-**Stack:** Java 21, Spring Boot 4.2, Spring Web MVC, Spring Data JPA (Hibernate), Bean Validation, MySQL 8 (H2 para desenvolvimento e testes), BCrypt para senhas e Springdoc (Swagger UI).
+**Stack:** Java 21, Spring Boot 4.2, Spring Web MVC, Spring Data JPA (Hibernate), Bean Validation, **H2** (padrão, em arquivo) ou **MySQL 8** (opcional), BCrypt para senhas e Springdoc (Swagger UI).
 
 ---
 
@@ -15,22 +15,42 @@ Back-end do sistema da VCO Barbearia. É uma API REST com as mesmas regras do pr
 
 Pré-requisito: **JDK 21 ou superior**. O Maven **não** precisa estar instalado: o projeto usa o Maven Wrapper (`mvnw`).
 
-### Opção 1: sem instalar nada (banco H2 em memória)
+### Padrão: banco H2 (não precisa instalar nem criar nada)
 
 ```bash
 cd backend-barbearia
-./mvnw spring-boot:run -Dspring-boot.run.profiles=dev      # Linux/Mac
-mvnw.cmd spring-boot:run -Dspring-boot.run.profiles=dev    # Windows
+./mvnw spring-boot:run       # Linux/Mac
+mvnw.cmd spring-boot:run     # Windows
 ```
 
-Os dados são recriados toda vez que a API sobe.
+- **Criação automática:** na primeira execução, o banco é criado no arquivo `backend-barbearia/data/vco-barbearia.mv.db`, com todas as tabelas e os dados da demonstração.
+- **Persistência:** o que for feito pelo sistema (agendamentos, clientes, despesas...) **continua salvo** depois de reiniciar a API.
+- **Recomeçar do zero:** use o botão "Restaurar dados da demonstração" no site, ou apague a pasta `data/` com a API desligada.
 
-- Console do H2: http://localhost:8080/h2-console
-- JDBC URL do console: `jdbc:h2:mem:vco` (usuário `sa`, sem senha)
+**Ver as tabelas (console web do H2):** com a API rodando, abra http://localhost:8080/h2-console e preencha:
 
-### Opção 2: com MySQL
+| Campo | Valor |
+|---|---|
+| JDBC URL | `jdbc:h2:file:./data/vco-barbearia;AUTO_SERVER=TRUE` |
+| User Name | `sa` |
+| Password | *(vazio)* |
 
-O banco `vco_barbearia` e as tabelas são **criados automaticamente**. Informe a conexão por variáveis de ambiente:
+Depois é só clicar em **Connect** e rodar SQL normalmente, por exemplo:
+`SELECT status, COUNT(*) FROM agendamento GROUP BY status;`
+
+> O H2 roda em "modo MySQL", então o SQL é praticamente o mesmo do MySQL.
+
+### Banco só em memória (perfil `dev`)
+
+Para testar com tudo zerado a cada execução:
+
+```bash
+mvnw.cmd spring-boot:run "-Dspring-boot.run.profiles=dev"
+```
+
+### Opcional: usar MySQL (perfil `mysql`)
+
+Também aqui **não é preciso criar nada no Workbench**: o banco `vco_barbearia` e as tabelas são criados automaticamente. Informe a conexão por variáveis de ambiente:
 
 | Variável | Padrão | Descrição |
 |---|---|---|
@@ -43,12 +63,12 @@ O banco `vco_barbearia` e as tabelas são **criados automaticamente**. Informe a
 Windows (PowerShell):
 ```powershell
 $env:DB_PORT="3307"; $env:DB_PASSWORD="sua_senha"
-.\mvnw.cmd spring-boot:run
+.\mvnw.cmd spring-boot:run "-Dspring-boot.run.profiles=mysql"
 ```
 
 Linux/Mac:
 ```bash
-DB_PASSWORD=sua_senha ./mvnw spring-boot:run
+DB_PASSWORD=sua_senha ./mvnw spring-boot:run -Dspring-boot.run.profiles=mysql
 ```
 
 Na primeira vez que sobe com o banco vazio, a API carrega os dados da demonstração:

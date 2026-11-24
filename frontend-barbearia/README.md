@@ -4,7 +4,7 @@ Protótipo funcional de um sistema de agendamento e gestão para barbearia, feit
 
 - **Dois modos de dados:**
   - **demonstração (padrão):** os dados ficam no navegador (localStorage), sem precisar de servidor;
-  - **API:** os dados ficam no back-end Spring Boot + MySQL da pasta [`../backend-barbearia`](../backend-barbearia/). Veja "Modo API" abaixo.
+  - **API:** os dados ficam no back-end Spring Boot (banco H2 ou MySQL) da pasta [`../backend-barbearia`](../backend-barbearia/). Veja "Modo API" abaixo.
 - **Os dois perfis compartilham os dados:** o que o cliente faz aparece para o barbeiro, e o contrário também.
 - **Mobile-first:** fica bem no celular e também no notebook ou projetor.
 
@@ -36,10 +36,10 @@ Os dados iniciais são carregados automaticamente na primeira vez que o site abr
 
 ### Modo API (com o back-end Spring Boot)
 
-1. Suba a API (veja o [README do back-end](../backend-barbearia/README.md)). O jeito mais rápido, sem MySQL:
+1. Suba a API (veja o [README do back-end](../backend-barbearia/README.md)). Não precisa instalar banco de dados: o H2 é criado sozinho.
    ```bash
    cd ../backend-barbearia
-   mvnw.cmd spring-boot:run -Dspring-boot.run.profiles=dev
+   mvnw.cmd spring-boot:run
    ```
 2. Rode o front-end apontando para ela:
    ```bash
