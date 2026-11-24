@@ -7,6 +7,12 @@ Sistema de agendamento e gestão para barbearia.
 | [`frontend-barbearia/`](frontend-barbearia/) | Interface web (Next.js + TypeScript + Tailwind) | [README](frontend-barbearia/README.md): logins de demonstração e roteiro de apresentação |
 | [`backend-barbearia/`](backend-barbearia/) | API REST (Spring Boot 4 + banco H2, ou MySQL opcional) | [README](backend-barbearia/README.md): como rodar, endpoints e modelo de dados |
 
+## Jeito mais fácil (Windows)
+
+Dê **dois cliques** em `iniciar-sistema-completo.bat`. Ele sobe a API e o site e abre o navegador. Para desligar, use `parar-sistema.bat`.
+
+O passo a passo completo, com a solução para os erros comuns, está em [`COMO-RODAR.txt`](COMO-RODAR.txt).
+
 ## Dois jeitos de rodar
 
 ### 1. Só o front-end (modo demonstração)
@@ -28,8 +34,8 @@ Terminal 1, a API:
 
 ```bash
 cd backend-barbearia
-mvnw.cmd spring-boot:run   # banco H2 criado sozinho em backend-barbearia/data (nada para instalar)
-# opcional, com MySQL:  $env:DB_PASSWORD="sua_senha"; mvnw.cmd spring-boot:run "-Dspring-boot.run.profiles=mysql"
+.\mvnw.cmd spring-boot:run   # banco H2 criado sozinho em backend-barbearia/data (nada para instalar)
+# opcional, com MySQL:  $env:DB_PASSWORD="sua_senha"; .\mvnw.cmd spring-boot:run "-Dspring-boot.run.profiles=mysql"
 ```
 
 Terminal 2, o front-end:

@@ -20,7 +20,7 @@ Pré-requisito: **JDK 21 ou superior**. O Maven **não** precisa estar instalado
 ```bash
 cd backend-barbearia
 ./mvnw spring-boot:run       # Linux/Mac
-mvnw.cmd spring-boot:run     # Windows
+.\mvnw.cmd spring-boot:run     # Windows
 ```
 
 - **Criação automática:** na primeira execução, o banco é criado no arquivo `backend-barbearia/data/vco-barbearia.mv.db`, com todas as tabelas e os dados da demonstração.
@@ -45,7 +45,7 @@ Depois é só clicar em **Connect** e rodar SQL normalmente, por exemplo:
 Para testar com tudo zerado a cada execução:
 
 ```bash
-mvnw.cmd spring-boot:run "-Dspring-boot.run.profiles=dev"
+.\mvnw.cmd spring-boot:run "-Dspring-boot.run.profiles=dev"
 ```
 
 ### Opcional: usar MySQL (perfil `mysql`)

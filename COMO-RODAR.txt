@@ -1,0 +1,151 @@
+=====================================================================
+  VCO BARBEARIA - COMO LIGAR O SISTEMA (front-end + back-end)
+=====================================================================
+
+O sistema tem duas partes que rodam ao mesmo tempo:
+
+  1) API (back-end, Spring Boot) ... porta 8080 ... guarda os dados no banco H2
+  2) SITE (front-end, Next.js) ..... porta 3000 ... é o que você abre no navegador
+
+O banco H2 é criado sozinho na primeira vez (pasta backend-barbearia\data).
+Não precisa instalar banco nem criar nada no Workbench.
+
+
+---------------------------------------------------------------------
+ ANTES DE TUDO (só uma vez por computador)
+---------------------------------------------------------------------
+
+  - Node.js (versão LTS): https://nodejs.org
+  - Java JDK 21 ou mais novo
+  - O Maven NÃO precisa ser instalado (o projeto já traz o mvnw).
+
+  Para conferir, abra um terminal e digite:
+      node -v
+      java -version
+  Os dois precisam mostrar um número de versão.
+
+
+---------------------------------------------------------------------
+ JEITO FÁCIL (recomendado): DOIS CLIQUES
+---------------------------------------------------------------------
+
+  Na pasta "barbearia" (a principal do projeto), dê dois cliques em:
+
+      iniciar-sistema-completo.bat
+
+  Ele faz tudo sozinho:
+    - instala o que faltar do site (só na primeira vez);
+    - abre a janela "VCO - API Spring Boot"  -> NÃO FECHE;
+    - espera a API ficar pronta (a 1ª vez pode levar de 1 a 3 minutos);
+    - abre a janela "VCO - Site Next.js"     -> NÃO FECHE;
+    - abre o navegador em http://localhost:3000
+
+  Para DESLIGAR tudo: dois cliques em  parar-sistema.bat
+  (ele fecha o banco com segurança; prefira usar ele em vez de só fechar as janelas)
+
+  Outro atalho:
+      iniciar-somente-site.bat  -> só o site, em "modo demonstração"
+                                   (dados no navegador, sem API e sem banco).
+
+
+---------------------------------------------------------------------
+ JEITO MANUAL: DOIS TERMINAIS (nesta ordem!)
+---------------------------------------------------------------------
+
+  TERMINAL 1 - a API:
+
+      cd "C:\Curso\Modelagem de Sistemas\barbearia\backend-barbearia"
+      .\mvnw.cmd spring-boot:run
+
+    Atenção: é  .\mvnw.cmd  (com o ponto e a barra na frente).
+    Sem o .\ o Windows responde "não é reconhecido como um comando".
+
+    Espere aparecer o quadro:
+      API da VCO Barbearia PRONTA em http://localhost:8080/api
+    Deixe esse terminal aberto.
+
+    (Também dá para iniciar a API pelo botão Run do VS Code no arquivo
+     BarbeariaApiApplication.java. O resultado é o mesmo.)
+
+  TERMINAL 2 - o site:
+
+      cd "C:\Curso\Modelagem de Sistemas\barbearia\frontend-barbearia"
+      npm install          (só na primeira vez)
+      npm run dev:api
+
+    Atenção: é  npm run dev:api  (com ":api").
+    O "npm run dev" sozinho abre o site em modo demonstração, que NÃO usa a API.
+
+    Espere aparecer "Ready" e abra no navegador:
+      http://localhost:3000
+
+
+---------------------------------------------------------------------
+ ENTRANDO NO SISTEMA
+---------------------------------------------------------------------
+
+  Na tela de login use os botões "Entrar como Cliente (demo)" e
+  "Entrar como Barbeiro (demo)", ou:
+
+      Cliente:  cliente@demo.com   senha 123456
+      Barbeiro: barbeiro@demo.com  senha 123456
+
+  Para alternar entre cliente e barbeiro: botão "Trocar perfil" no topo.
+
+  Como saber se o site está usando a API: entre como barbeiro, clique no
+  avatar (canto superior direito) > Configurações. No fim da página aparece
+  "Modo atual: servidor Spring Boot" (com API) ou "demonstração" (sem API).
+
+
+---------------------------------------------------------------------
+ ENDEREÇOS ÚTEIS (com a API ligada)
+---------------------------------------------------------------------
+
+  Site ..................... http://localhost:3000
+  API ...................... http://localhost:8080/api
+  Documentação da API ...... http://localhost:8080/swagger-ui.html
+  Console do banco H2 ...... http://localhost:8080/h2-console
+      JDBC URL: copie a linha "JDBC URL" que aparece na janela da API
+      (algo como jdbc:h2:file:C:/Curso/.../backend-barbearia/data/vco-barbearia;AUTO_SERVER=TRUE)
+      Usuário: sa      Senha: (em branco)
+
+  Pelo celular (mesmo Wi-Fi): descubra o IP do computador com "ipconfig"
+  e abra  http://SEU-IP:3000  no celular.
+
+
+---------------------------------------------------------------------
+ PROBLEMAS COMUNS
+---------------------------------------------------------------------
+
+  "mvnw.cmd não é reconhecido como um comando..."
+      -> Use  .\mvnw.cmd  e confira se está dentro da pasta backend-barbearia.
+
+  "npm error Missing script: dev" / "Could not read package.json"
+      -> Você está na pasta errada. Entre em frontend-barbearia antes do npm.
+
+  O site mostra "Servidor indisponível"
+      -> O site foi aberto com "npm run dev:api", mas a API não está ligada
+         (ou ainda está subindo). Ligue a API, espere o quadro "PRONTA"
+         e clique em "Tentar de novo".
+
+  O que faço no site não aparece no banco / no celular
+      -> O site está em modo demonstração ("npm run dev").
+         Feche e abra de novo com "npm run dev:api".
+
+  "Port 3000 is in use" ou o site abriu na porta 3001
+      -> Já existe outro site ligado. Rode parar-sistema.bat (ou feche a
+         outra janela) e inicie de novo.
+
+  "Port 8080 was already in use" ao subir a API
+      -> A API já está ligada em outra janela. Use essa, ou rode
+         parar-sistema.bat e inicie de novo.
+
+  Quero apagar tudo e voltar aos dados iniciais
+      -> No site: entre como barbeiro > Configurações >
+         "Restaurar dados da demonstração".
+         Ou: desligue a API e apague a pasta backend-barbearia\data.
+
+  Existe uma pasta "data" solta na pasta principal (barbearia\data)
+      -> É um banco antigo, criado quando a API era iniciada pelo VS Code
+         antes desta correção. Pode apagar (com a API desligada).
+=====================================================================

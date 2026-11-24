@@ -39,7 +39,7 @@ Os dados iniciais são carregados automaticamente na primeira vez que o site abr
 1. Suba a API (veja o [README do back-end](../backend-barbearia/README.md)). Não precisa instalar banco de dados: o H2 é criado sozinho.
    ```bash
    cd ../backend-barbearia
-   mvnw.cmd spring-boot:run
+   .\mvnw.cmd spring-boot:run
    ```
 2. Rode o front-end apontando para ela:
    ```bash
