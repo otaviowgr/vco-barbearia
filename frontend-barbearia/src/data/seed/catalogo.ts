@@ -3,9 +3,6 @@ import type { Barbeiro, Cliente, ConfigBarbearia, Servico, Usuario } from "@/typ
 const unsplash = (id: string, w = 800) =>
   `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=70`;
 
-export const IMAGEM_HERO = unsplash("photo-1585747860715-2ba37e788b70", 1600);
-export const IMAGEM_LOGIN = unsplash("photo-1503951914875-452162b0f3f1", 1400);
-
 export const configSeed: ConfigBarbearia = {
   nome: "VCO Barbearia",
   slogan: "Estilo, precisão e um bom papo.",
@@ -110,7 +107,7 @@ export const barbeirosSeed: Barbeiro[] = [
     bio: "Fundador da VCO, 12 anos de navalha. Mestre na barba com toalha quente.",
     foto: unsplash("photo-1500648767791-00dcc994a43e", 400),
     telefone: "(48) 99999-1234",
-    cor: "#d99a2b",
+    cor: "#3b82f6",
     ativo: true,
     temLogin: true,
   },
@@ -121,7 +118,7 @@ export const barbeirosSeed: Barbeiro[] = [
     bio: "Especialista em fade e desenhos. Se tem risquinho, é com ele.",
     foto: unsplash("photo-1507003211169-0a1dd7228f2d", 400),
     telefone: "(48) 98888-2222",
-    cor: "#2f9ad8",
+    cor: "#94a3b8",
     ativo: true,
     temLogin: false,
   },
@@ -132,7 +129,7 @@ export const barbeirosSeed: Barbeiro[] = [
     bio: "Visagista: analisa o formato do rosto para indicar o corte ideal.",
     foto: unsplash("photo-1506794778202-cad84cf45f1d", 400),
     telefone: "(48) 97777-3333",
-    cor: "#e0607e",
+    cor: "#e4e4e7",
     ativo: true,
     temLogin: false,
   },

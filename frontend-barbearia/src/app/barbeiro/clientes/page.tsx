@@ -51,21 +51,21 @@ export default function PaginaClientes() {
             <button
               key={c.id}
               onClick={() => setAbertoId(c.id)}
-              className="group flex animate-entrar items-center gap-3 rounded-2xl border border-borda bg-painel p-4 text-left transition hover:-translate-y-0.5 hover:border-ouro/40"
+              className="group flex animate-entrar items-center gap-3 rounded-2xl border border-borda bg-painel p-4 text-left transition hover:-translate-y-0.5 hover:border-marca/40"
             >
               <Avatar nome={c.nome} tamanho={48} />
               <div className="min-w-0 flex-1">
                 <p className="flex items-center gap-1.5 truncate font-semibold">
                   {c.nome}
-                  {c.fidelidade.descontoDisponivel && <Crown className="size-3.5 shrink-0 text-ouro" />}
+                  {c.fidelidade.descontoDisponivel && <Crown className="size-3.5 shrink-0 text-marca" />}
                 </p>
                 <p className="text-sm text-texto-2">{c.telefone}</p>
                 <p className="mt-1 text-xs text-texto-3">
-                  {c.atendimentos} atendimento{c.atendimentos === 1 ? "" : "s"} · <span className="text-ouro">{formatarMoeda(c.totalGasto)}</span>
+                  {c.atendimentos} atendimento{c.atendimentos === 1 ? "" : "s"} · <span className="text-marca">{formatarMoeda(c.totalGasto)}</span>
                   {c.proximoAgendamento && ` · próx. ${formatarData(c.proximoAgendamento.data).slice(0, 5)}`}
                 </p>
               </div>
-              <ChevronRight className="size-5 text-texto-3 transition group-hover:translate-x-0.5 group-hover:text-ouro" />
+              <ChevronRight className="size-5 text-texto-3 transition group-hover:translate-x-0.5 group-hover:text-marca" />
             </button>
           ))}
         </div>
@@ -116,7 +116,7 @@ function FichaModal({ id, aoFechar }: { id: string | null; aoFechar: () => void 
             </div>
             <div className="flex w-full gap-2 sm:w-auto">
               <a href={linkWhatsApp(ficha.telefone, msg)} target="_blank" rel="noopener noreferrer" className="flex-1">
-                <Botao largura="total" className="!bg-none !bg-[#25d366] !text-white" icone={<IconeWhatsApp className="size-4" />}>
+                <Botao largura="total" icone={<IconeWhatsApp className="size-4" />}>
                   Chamar no WhatsApp
                 </Botao>
               </a>
@@ -130,22 +130,22 @@ function FichaModal({ id, aoFechar }: { id: string | null; aoFechar: () => void 
 
           <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
             {[
-              { r: "Total gasto", v: formatarMoeda(ficha.totalGasto), ouro: true },
+              { r: "Total gasto", v: formatarMoeda(ficha.totalGasto), marca: true },
               { r: "Atendimentos", v: String(ficha.atendimentos) },
               { r: "Faltas", v: String(ficha.faltas) },
               { r: "Última visita", v: ficha.ultimaVisita ? formatarData(ficha.ultimaVisita) : "—" },
             ].map((k) => (
               <div key={k.r} className="rounded-xl border border-borda bg-painel-2 p-3">
                 <p className="text-[11px] tracking-wide text-texto-3 uppercase">{k.r}</p>
-                <p className={`font-display text-lg font-semibold ${k.ouro ? "text-ouro" : ""}`}>{k.v}</p>
+                <p className={`font-display text-lg font-semibold ${k.marca ? "text-marca" : ""}`}>{k.v}</p>
               </div>
             ))}
           </div>
 
-          <div className="rounded-xl border border-ouro/30 bg-ouro/5 p-4">
+          <div className="rounded-xl border border-marca/30 bg-marca/5 p-4">
             <div className="flex items-center justify-between text-sm">
               <span className="flex items-center gap-1.5 font-medium">
-                <Crown className="size-4 text-ouro" /> Fidelidade
+                <Crown className="size-4 text-marca" /> Fidelidade
               </span>
               <span className="text-texto-2">
                 {ficha.fidelidade.descontoDisponivel

@@ -108,7 +108,7 @@ function Form({
     <div className="grid gap-5 md:grid-cols-2">
       <div className="space-y-4">
         {novoCliente ? (
-          <div className="space-y-3 rounded-xl border border-ouro/30 bg-ouro/5 p-3">
+          <div className="space-y-3 rounded-xl border border-marca/30 bg-marca/5 p-3">
             <Campo rotulo="Nome do novo cliente">
               <Input value={nomeNovo} onChange={(e) => setNomeNovo(e.target.value)} placeholder="Nome completo" />
             </Campo>
@@ -145,7 +145,7 @@ function Form({
                 <button
                   key={s.id}
                   onClick={() => setServicoIds((l) => (on ? l.filter((x) => x !== s.id) : [...l, s.id]))}
-                  className={`rounded-full border px-3 py-1.5 text-xs font-medium transition ${on ? "border-ouro bg-ouro/15 text-ouro" : "border-borda text-texto-2 hover:border-ouro/40"}`}
+                  className={`rounded-full border px-3 py-1.5 text-xs font-medium transition ${on ? "border-marca bg-marca/15 text-marca" : "border-borda text-texto-2 hover:border-marca/40"}`}
                 >
                   {s.nome}
                 </button>
@@ -153,7 +153,7 @@ function Form({
             })}
           </div>
           <p className="mt-2 text-xs text-texto-3">
-            {formatarDuracao(duracao || 0)} · <span className="text-ouro">{formatarMoeda(total)}</span> · pagamento na barbearia
+            {formatarDuracao(duracao || 0)} · <span className="text-marca">{formatarMoeda(total)}</span> · pagamento na barbearia
           </p>
         </div>
         <div className="grid grid-cols-2 gap-3">

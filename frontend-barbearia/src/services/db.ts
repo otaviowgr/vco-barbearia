@@ -39,7 +39,7 @@ type Tabela = keyof BancoDemo;
 const PREFIXO = "vco:";
 const CHAVE_VERSAO = `${PREFIXO}versao`;
 /** Aumente quando mudar o formato do seed para forçar recarga. */
-const VERSAO_SEED = "1";
+const VERSAO_SEED = "2"; // 2 = tema azul (cores dos barbeiros)
 
 const TABELAS: Tabela[] = [
   "config",

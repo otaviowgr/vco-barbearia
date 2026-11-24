@@ -27,7 +27,7 @@ export function BotaoTrocarPerfil() {
       onClick={trocarPerfil}
       disabled={trocando}
       title={`Trocar para o perfil ${destino} (demonstração)`}
-      className="group inline-flex h-9 items-center gap-1.5 rounded-full border border-borda bg-painel-2 px-3 text-xs font-medium text-texto-2 transition hover:border-ouro/50 hover:text-ouro disabled:opacity-60"
+      className="group inline-flex h-9 items-center gap-1.5 rounded-full border border-borda bg-painel-2 px-3 text-xs font-medium text-texto-2 transition hover:border-marca/50 hover:text-marca disabled:opacity-60"
     >
       <ArrowLeftRight className={`size-3.5 transition-transform duration-500 ${trocando ? "rotate-180" : "group-hover:rotate-180"}`} />
       <span className="hidden sm:inline">Trocar perfil</span>
@@ -99,13 +99,13 @@ export function BarraTopo({ itens, linkConfig, inicio }: { itens: ItemNav[]; lin
                 key={i.href}
                 href={i.href}
                 className={`relative flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition ${
-                  at ? "bg-ouro/10 text-ouro" : "text-texto-2 hover:bg-painel-2 hover:text-texto"
+                  at ? "bg-marca/10 text-marca" : "text-texto-2 hover:bg-painel-2 hover:text-texto"
                 }`}
               >
                 {i.icone}
                 {i.rotulo}
                 {!!i.badge && (
-                  <span className="grid h-5 min-w-5 place-items-center rounded-full bg-ouro px-1 text-[11px] font-bold text-fundo">{i.badge}</span>
+                  <span className="grid h-5 min-w-5 place-items-center rounded-full bg-marca-escuro px-1 text-[11px] font-bold text-white">{i.badge}</span>
                 )}
               </Link>
             );
@@ -132,13 +132,13 @@ export function NavInferior({ itens, inicio }: { itens: ItemNav[]; inicio: strin
             <Link
               key={i.href}
               href={i.href}
-              className={`relative flex flex-1 flex-col items-center gap-1 py-2.5 text-[11px] font-medium transition ${at ? "text-ouro" : "text-texto-3"}`}
+              className={`relative flex flex-1 flex-col items-center gap-1 py-2.5 text-[11px] font-medium transition ${at ? "text-marca" : "text-texto-3"}`}
             >
-              {at && <span className="absolute top-0 h-0.5 w-8 rounded-full bg-ouro" />}
+              {at && <span className="absolute top-0 h-0.5 w-8 rounded-full bg-marca" />}
               <span className="relative">
                 {i.icone}
                 {!!i.badge && (
-                  <span className="absolute -top-1.5 -right-2.5 grid h-4 min-w-4 place-items-center rounded-full bg-ouro px-1 text-[10px] font-bold text-fundo">
+                  <span className="absolute -top-1.5 -right-2.5 grid h-4 min-w-4 place-items-center rounded-full bg-marca-escuro px-1 text-[10px] font-bold text-white">
                     {i.badge}
                   </span>
                 )}

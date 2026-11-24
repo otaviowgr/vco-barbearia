@@ -83,14 +83,14 @@ export function Calendario({
               onClick={() => aoEscolher(data)}
               className={`relative aspect-square rounded-xl text-sm font-medium transition ${
                 sel
-                  ? "scale-105 bg-ouro text-fundo shadow-lg shadow-ouro/25"
+                  ? "scale-105 bg-marca-escuro text-white shadow-lg shadow-marca/25"
                   : bloqueado
                     ? "text-texto-3/40 line-through decoration-texto-3/30"
                     : "text-texto hover:bg-painel-3"
               }`}
             >
               {i + 1}
-              {ehHoje && !sel && <span className="absolute bottom-1.5 left-1/2 size-1 -translate-x-1/2 rounded-full bg-ouro" />}
+              {ehHoje && !sel && <span className="absolute bottom-1.5 left-1/2 size-1 -translate-x-1/2 rounded-full bg-marca" />}
             </button>
           );
         })}

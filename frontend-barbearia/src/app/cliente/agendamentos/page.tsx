@@ -105,7 +105,7 @@ export default function MeusAgendamentos() {
                 <b className="text-texto">{cancelando.inicio}</b>.
               </p>
               {cancelando.statusPagamento === "pago" && (
-                <p className="mt-2 text-ouro">O valor pago online ({formatarMoeda(cancelando.valorFinal)}) será estornado.</p>
+                <p className="mt-2 text-marca">O valor pago online ({formatarMoeda(cancelando.valorFinal)}) será estornado.</p>
               )}
               {cancelando.descontoFidelidade && <p className="mt-2">Seu desconto fidelidade volta a ficar disponível.</p>}
             </>

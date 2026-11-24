@@ -6,12 +6,14 @@ import { ArrowRight, Scissors, User } from "lucide-react";
 import { Logo } from "@/components/Logo";
 import { rotaInicial, useSessao } from "@/components/SessaoProvider";
 import { Botao } from "@/components/ui/Botao";
-import { Campo, Imagem, Input, Segmentado } from "@/components/ui/basicos";
+import { Campo, Input, Segmentado } from "@/components/ui/basicos";
 import { useToast } from "@/components/ui/Toast";
+import { IconeServico } from "@/components/cliente/IconeServico";
 import { authService } from "@/services";
-import { IMAGEM_LOGIN } from "@/data/seed";
 import { formatarTelefone } from "@/lib/formatadores";
 import type { Perfil } from "@/types";
+
+const SERVICOS_VITRINE = ["Corte", "Barba", "Degradê", "Pigmentação", "Sobrancelha", "Hidratação"];
 
 export default function PaginaLogin() {
   const { sessao, entrar, entrarDemo, definirSessao, irParaInicio } = useSessao();
@@ -60,15 +62,26 @@ export default function PaginaLogin() {
 
   return (
     <div className="grid min-h-dvh lg:grid-cols-[1.1fr_1fr]">
-      {/* Painel com foto (desktop) */}
-      <div className="relative hidden overflow-hidden lg:block">
-        <Imagem src={IMAGEM_LOGIN} alt="Barbeiro trabalhando" className="absolute inset-0 size-full" />
-        <div className="absolute inset-0 bg-gradient-to-t from-fundo via-fundo/50 to-fundo/10" />
-        <div className="absolute inset-x-0 bottom-0 p-12">
+      {/* Painel minimalista (desktop) */}
+      <div className="fundo-grade relative hidden flex-col justify-center gap-20 overflow-hidden border-r border-borda p-12 lg:flex">
+        <div className="grid w-fit grid-cols-3 gap-3" aria-hidden>
+          {SERVICOS_VITRINE.map((nome, i) => (
+            <div
+              key={nome}
+              className="group flex w-28 animate-entrar flex-col items-center gap-2 rounded-2xl border border-borda bg-fundo/60 p-4 backdrop-blur transition duration-300 hover:-translate-y-1 hover:border-marca/40"
+              style={{ animationDelay: `${i * 70}ms` }}
+            >
+              <IconeServico nome={nome} tamanho="lg" />
+              <span className="text-center text-xs text-texto-2">{nome}</span>
+            </div>
+          ))}
+        </div>
+        <div>
+          <div className="mb-5 h-px w-16 bg-marca" />
           <p className="font-display text-5xl leading-tight font-semibold tracking-wide uppercase">
             Seu estilo,
             <br />
-            <span className="texto-ouro">no seu horário.</span>
+            <span className="texto-marca">no seu horário.</span>
           </p>
           <p className="mt-4 max-w-md text-texto-2">
             Agende em segundos, acompanhe seus horários e ganhe descontos no plano fidelidade.
@@ -90,23 +103,23 @@ export default function PaginaLogin() {
             <button
               onClick={() => demo("cliente")}
               disabled={!!carregando}
-              className="group flex items-center gap-3 rounded-2xl border border-ouro/40 bg-ouro/10 p-4 text-left transition hover:-translate-y-0.5 hover:bg-ouro/15 disabled:opacity-60"
+              className="group flex items-center gap-3 rounded-2xl border border-marca/40 bg-marca/10 p-4 text-left transition hover:-translate-y-0.5 hover:bg-marca/15 disabled:opacity-60"
             >
-              <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-ouro text-fundo">
+              <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-marca-escuro text-white">
                 <User className="size-5" />
               </span>
               <span className="min-w-0">
-                <span className="block text-sm font-semibold text-ouro">Entrar como Cliente</span>
+                <span className="block text-sm font-semibold text-texto">Entrar como Cliente</span>
                 <span className="block text-xs text-texto-2">(demo) João Silva</span>
               </span>
-              <ArrowRight className={`ml-auto size-4 text-ouro transition group-hover:translate-x-0.5 ${carregando === "cliente" ? "animate-pulse" : ""}`} />
+              <ArrowRight className={`ml-auto size-4 text-marca transition group-hover:translate-x-0.5 ${carregando === "cliente" ? "animate-pulse" : ""}`} />
             </button>
             <button
               onClick={() => demo("barbeiro")}
               disabled={!!carregando}
-              className="group flex items-center gap-3 rounded-2xl border border-borda bg-painel-2 p-4 text-left transition hover:-translate-y-0.5 hover:border-ouro/40 disabled:opacity-60"
+              className="group flex items-center gap-3 rounded-2xl border border-borda bg-painel-2 p-4 text-left transition hover:-translate-y-0.5 hover:border-marca/40 disabled:opacity-60"
             >
-              <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-painel-3 text-ouro">
+              <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-painel-3 text-marca">
                 <Scissors className="size-5" />
               </span>
               <span className="min-w-0">
@@ -155,8 +168,8 @@ export default function PaginaLogin() {
 
           <div className="mt-6 rounded-xl border border-borda bg-painel p-3.5 text-xs text-texto-2">
             <p className="mb-1 font-semibold text-texto">Logins de demonstração</p>
-            <p>Cliente: <code className="text-ouro">cliente@demo.com</code> / <code className="text-ouro">123456</code></p>
-            <p>Barbeiro: <code className="text-ouro">barbeiro@demo.com</code> / <code className="text-ouro">123456</code></p>
+            <p>Cliente: <code className="text-marca">cliente@demo.com</code> / <code className="text-marca">123456</code></p>
+            <p>Barbeiro: <code className="text-marca">barbeiro@demo.com</code> / <code className="text-marca">123456</code></p>
           </div>
         </div>
       </div>

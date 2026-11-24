@@ -23,7 +23,7 @@ export function RestaurarDemo() {
         {USAR_API ? (
           <span className="text-sucesso">servidor Spring Boot ({API_URL}) — os dados ficam no banco de dados do servidor</span>
         ) : (
-          <span className="text-ouro">demonstração — os dados ficam só neste navegador</span>
+          <span className="text-marca">demonstração — os dados ficam só neste navegador</span>
         )}
       </p>
       <Botao className="mt-4" variante="perigo" onClick={() => setAberto(true)} icone={<DatabaseBackup className="size-4" />}>

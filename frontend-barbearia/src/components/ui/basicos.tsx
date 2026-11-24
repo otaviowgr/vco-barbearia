@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, type InputHTMLAttributes, type ReactNode, type SelectHTMLAttributes, type TextareaHTMLAttributes } from "react";
-import { ImageOff, Loader2 } from "lucide-react";
+import type { InputHTMLAttributes, ReactNode, SelectHTMLAttributes, TextareaHTMLAttributes } from "react";
+import { Loader2 } from "lucide-react";
 import { iniciais } from "@/lib/formatadores";
 
 export function Card({
@@ -15,7 +15,7 @@ export function Card({
   interativo?: boolean;
   onClick?: () => void;
 }) {
-  const base = `rounded-2xl border border-borda bg-painel ${interativo ? "transition duration-200 hover:-translate-y-0.5 hover:border-ouro/40 hover:shadow-xl hover:shadow-black/40 cursor-pointer" : ""}`;
+  const base = `rounded-2xl border border-borda bg-painel ${interativo ? "transition duration-200 hover:-translate-y-0.5 hover:border-marca/40 hover:shadow-xl hover:shadow-black/40 cursor-pointer" : ""}`;
   if (onClick) {
     return (
       <button type="button" onClick={onClick} className={`${base} block w-full text-left ${className}`}>
@@ -26,14 +26,14 @@ export function Card({
   return <div className={`${base} ${className}`}>{children}</div>;
 }
 
-type CorBadge = "ouro" | "verde" | "vermelho" | "azul" | "cinza" | "amarelo" | "roxo";
+type CorBadge = "marca" | "verde" | "vermelho" | "azul" | "cinza" | "amarelo" | "roxo";
 const CORES_BADGE: Record<CorBadge, string> = {
-  ouro: "bg-ouro/15 text-ouro border-ouro/30",
+  marca: "bg-marca/15 text-marca border-marca/30",
   verde: "bg-sucesso/12 text-sucesso border-sucesso/25",
   vermelho: "bg-perigo/12 text-perigo border-perigo/25",
   azul: "bg-info/12 text-info border-info/25",
   amarelo: "bg-aviso/12 text-aviso border-aviso/25",
-  roxo: "bg-violet-400/12 text-violet-300 border-violet-400/25",
+  roxo: "bg-white/5 text-texto border-borda-forte",
   cinza: "bg-painel-3 text-texto-2 border-borda",
 };
 
@@ -51,7 +51,7 @@ export function Skeleton({ className = "" }: { className?: string }) {
 }
 
 export function Spinner({ className = "" }: { className?: string }) {
-  return <Loader2 className={`size-5 animate-spin text-ouro ${className}`} />;
+  return <Loader2 className={`size-5 animate-spin text-marca ${className}`} />;
 }
 
 export function EstadoVazio({
@@ -67,7 +67,7 @@ export function EstadoVazio({
 }) {
   return (
     <div className="flex animate-entrar flex-col items-center rounded-2xl border border-dashed border-borda px-6 py-10 text-center">
-      <div className="mb-3 grid size-14 place-items-center rounded-full bg-ouro/10 text-ouro">{icone}</div>
+      <div className="mb-3 grid size-14 place-items-center rounded-full bg-marca/10 text-marca">{icone}</div>
       <p className="font-display text-lg font-medium tracking-wide">{titulo}</p>
       {descricao && <p className="mt-1 max-w-sm text-sm text-texto-2">{descricao}</p>}
       {acao && <div className="mt-5">{acao}</div>}
@@ -75,41 +75,20 @@ export function EstadoVazio({
   );
 }
 
-/** <img> com fallback elegante caso a imagem externa não carregue (ex.: sem internet). */
-export function Imagem({ src, alt, className = "" }: { src: string; alt: string; className?: string }) {
-  const [falhou, setFalhou] = useState(false);
-  if (falhou || !src) {
-    return (
-      <div className={`grid place-items-center bg-gradient-to-br from-painel-3 to-painel-2 text-texto-3 ${className}`} role="img" aria-label={alt}>
-        <ImageOff className="size-6" />
-      </div>
-    );
-  }
-  return (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img src={src} alt={alt} loading="lazy" onError={() => setFalhou(true)} className={`object-cover ${className}`} />
-  );
-}
-
-export function Avatar({ nome, foto, cor, tamanho = 40 }: { nome: string; foto?: string; cor?: string; tamanho?: number }) {
-  const [falhou, setFalhou] = useState(false);
-  const estilo = { width: tamanho, height: tamanho, fontSize: tamanho * 0.38 };
-  if (foto && !falhou) {
-    return (
-      // eslint-disable-next-line @next/next/no-img-element
-      <img
-        src={foto}
-        alt={nome}
-        onError={() => setFalhou(true)}
-        style={{ ...estilo, boxShadow: cor ? `0 0 0 2px ${cor}` : undefined }}
-        className="shrink-0 rounded-full object-cover"
-      />
-    );
-  }
+/** Avatar minimalista: iniciais do nome, com a cor de identificação (barbeiros). */
+export function Avatar({ nome, cor, tamanho = 40 }: { nome: string; cor?: string; tamanho?: number }) {
   return (
     <span
-      style={{ ...estilo, background: cor ? `${cor}26` : undefined, color: cor ?? undefined }}
-      className="grid shrink-0 place-items-center rounded-full bg-ouro/15 font-semibold text-ouro"
+      style={{
+        width: tamanho,
+        height: tamanho,
+        fontSize: tamanho * 0.36,
+        background: cor ? `${cor}1f` : undefined,
+        color: cor ?? undefined,
+        boxShadow: cor ? `inset 0 0 0 1px ${cor}59` : undefined,
+      }}
+      className="grid shrink-0 place-items-center rounded-full bg-painel-3 font-semibold tracking-wide text-texto shadow-[inset_0_0_0_1px_var(--color-borda-forte)]"
+      role="img"
       aria-label={nome}
     >
       {iniciais(nome)}
@@ -122,7 +101,7 @@ export function BarraProgresso({ valor, max, className = "" }: { valor: number; 
   return (
     <div className={`h-2.5 overflow-hidden rounded-full bg-painel-3 ${className}`} role="progressbar" aria-valuenow={valor} aria-valuemax={max}>
       <div
-        className="h-full rounded-full bg-gradient-to-r from-ouro-escuro via-ouro to-ouro-claro transition-[width] duration-700 ease-out"
+        className="h-full rounded-full bg-gradient-to-r from-marca-escuro via-marca to-marca-claro transition-[width] duration-700 ease-out"
         style={{ width: `${pct}%` }}
       />
     </div>
@@ -130,7 +109,7 @@ export function BarraProgresso({ valor, max, className = "" }: { valor: number; 
 }
 
 const estiloCampo =
-  "w-full rounded-xl border border-borda bg-painel-2 px-3.5 text-sm text-texto placeholder:text-texto-3 transition focus:border-ouro/60 focus:outline-none focus:ring-2 focus:ring-ouro/20 disabled:opacity-60";
+  "w-full rounded-xl border border-borda bg-painel-2 px-3.5 text-sm text-texto placeholder:text-texto-3 transition focus:border-marca/60 focus:outline-none focus:ring-2 focus:ring-marca/20 disabled:opacity-60";
 
 export function Campo({ rotulo, dica, children }: { rotulo: string; dica?: string; children: ReactNode }) {
   return (
@@ -178,7 +157,7 @@ export function Segmentado<T extends string>({
           aria-selected={valor === o.valor}
           onClick={() => aoMudar(o.valor)}
           className={`flex-1 rounded-lg px-3 py-1.5 text-sm font-medium whitespace-nowrap transition ${
-            valor === o.valor ? "bg-ouro text-fundo shadow" : "text-texto-2 hover:text-texto"
+            valor === o.valor ? "bg-marca-escuro text-white shadow" : "text-texto-2 hover:text-texto"
           }`}
         >
           {o.rotulo}
@@ -196,7 +175,7 @@ export function Interruptor({ ligado, aoMudar, rotulo }: { ligado: boolean; aoMu
       aria-checked={ligado}
       aria-label={rotulo}
       onClick={() => aoMudar(!ligado)}
-      className={`relative h-6 w-11 shrink-0 rounded-full transition ${ligado ? "bg-ouro" : "bg-painel-3 border border-borda"}`}
+      className={`relative h-6 w-11 shrink-0 rounded-full transition ${ligado ? "bg-marca" : "bg-painel-3 border border-borda"}`}
     >
       <span className={`absolute top-0.5 size-5 rounded-full bg-white shadow transition-all ${ligado ? "left-[22px]" : "left-0.5"}`} />
     </button>

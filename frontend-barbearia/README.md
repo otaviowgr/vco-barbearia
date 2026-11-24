@@ -89,7 +89,7 @@ Também é possível criar uma conta nova de cliente pela aba "Sou novo aqui". E
 
 1. Na tela de login, clique em **Entrar como Cliente (demo)**.
 2. Mostre a **vitrine**:
-   - serviços com foto, descrição, duração e preço;
+   - serviços com ícone (que se mexe ao passar o mouse), descrição, duração e preço;
    - "Nossa equipe";
    - horário de funcionamento;
    - botão flutuante do WhatsApp;
@@ -231,5 +231,5 @@ As duas versões têm **as mesmas assinaturas**, e o TypeScript confere isso. Os
 ## Observações
 
 - **Pagamentos:** são **100% simulados**. Nenhum dado de cartão ou Pix sai do navegador.
-- **Imagens:** vêm do Unsplash (precisa de internet). Sem conexão, aparece um placeholder.
+- **Visual:** tema escuro minimalista (preto, cinza, branco e azul), sem fotos: os serviços são representados por ícones, escolhidos automaticamente pelo nome do serviço.
 - **Conclusão antecipada:** para facilitar a demonstração, o barbeiro pode concluir um atendimento mesmo antes do horário marcado.

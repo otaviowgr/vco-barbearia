@@ -81,7 +81,7 @@ export function Timeline({
           return (
             <div
               key={c.chave}
-              className={`relative border-l border-borda ${c.fechado ? "listras" : "cursor-copy"} ${ehHoje ? "bg-ouro/[0.02]" : ""}`}
+              className={`relative border-l border-borda ${c.fechado ? "listras" : "cursor-copy"} ${ehHoje ? "bg-marca/[0.02]" : ""}`}
               style={{ height: altura }}
               onClick={(e) => {
                 if (c.fechado || e.target !== e.currentTarget) return;
@@ -129,7 +129,7 @@ export function Timeline({
                   a={a}
                   inicioMin={inicioMin}
                   cliente={clientes.get(a.clienteId)}
-                  cor={barbeiros.get(a.barbeiroId)?.cor ?? "#e8b04b"}
+                  cor={barbeiros.get(a.barbeiroId)?.cor ?? "#3b82f6"}
                   aoClicar={() => aoClicarAgendamento(a)}
                 />
               ))}
@@ -171,7 +171,7 @@ function BlocoAgendamento({
     <button
       onClick={aoClicar}
       className={`group absolute inset-x-1 z-[2] overflow-hidden rounded-lg border-l-[3px] px-2 py-1 text-left text-xs transition hover:z-[3] hover:brightness-125 hover:shadow-lg hover:shadow-black/50 ${
-        novo ? "animate-pulso-ouro ring-1 ring-ouro" : ""
+        novo ? "animate-pulso-marca ring-1 ring-marca" : ""
       } ${inativo ? "opacity-40" : concluido ? "opacity-75" : ""} ${pendente ? "border-y border-r border-dashed" : ""}`}
       style={{
         top: (ini - inicioMin) * PX_POR_MIN + 1,
@@ -189,7 +189,7 @@ function BlocoAgendamento({
           {cliente ? primeiroNome(cliente.nome) + (cliente.nome.includes(" ") ? " " + cliente.nome.split(" ").slice(-1)[0][0] + "." : "") : "Cliente"}
         </span>
         <span className="ml-auto flex shrink-0 items-center gap-1">
-          {novo && <span className="rounded bg-ouro px-1 text-[10px] font-bold text-fundo uppercase">Novo</span>}
+          {novo && <span className="rounded bg-marca-escuro px-1 text-[10px] font-bold text-white uppercase">Novo</span>}
           {pendente && !novo && <span className="rounded bg-aviso/20 px-1 text-[10px] font-medium text-aviso">a confirmar</span>}
           {concluido && <CheckCheck className="size-3.5 text-sucesso" />}
           {a.status === "nao_compareceu" && <UserX className="size-3.5" />}
@@ -198,7 +198,7 @@ function BlocoAgendamento({
       {altura > 34 && <p className="truncate text-texto-2">{a.servicos.map((s) => s.nome).join(" + ")}</p>}
       {altura > 52 && (
         <p className="mt-0.5 flex items-center gap-1 text-texto-2">
-          <span className="font-semibold text-ouro">{formatarMoeda(a.valorFinal)}</span>
+          <span className="font-semibold text-marca">{formatarMoeda(a.valorFinal)}</span>
           <span className="text-texto-3">·</span>
           {a.statusPagamento === "pago" ? (
             <span className="flex items-center gap-0.5 text-sucesso">

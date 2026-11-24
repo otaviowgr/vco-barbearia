@@ -5,7 +5,8 @@ import { Clock, Pencil, Plus, Scissors } from "lucide-react";
 import type { Servico } from "@/types";
 import { useApi } from "@/hooks/useApi";
 import { servicoService, type ServicoForm } from "@/services";
-import { Badge, Campo, EstadoVazio, Imagem, Input, Interruptor, Skeleton, Textarea, TituloPagina } from "@/components/ui/basicos";
+import { Badge, Campo, EstadoVazio, Input, Interruptor, Skeleton, Textarea, TituloPagina } from "@/components/ui/basicos";
+import { IconeServico } from "@/components/cliente/IconeServico";
 import { Botao } from "@/components/ui/Botao";
 import { Modal } from "@/components/ui/Modal";
 import { useToast } from "@/components/ui/Toast";
@@ -42,7 +43,7 @@ export default function PaginaServicos() {
       {!servicos ? (
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
           {Array.from({ length: 6 }, (_, i) => (
-            <Skeleton key={i} className="h-64" />
+            <Skeleton key={i} className="h-52" />
           ))}
         </div>
       ) : servicos.length === 0 ? (
@@ -50,19 +51,21 @@ export default function PaginaServicos() {
       ) : (
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
           {servicos.map((s) => (
-            <div key={s.id} className={`animate-entrar overflow-hidden rounded-2xl border border-borda bg-painel transition ${s.ativo ? "" : "opacity-55 grayscale"}`}>
-              <div className="relative h-36">
-                <Imagem src={s.foto} alt={s.nome} className="size-full" />
-                <div className="absolute inset-0 bg-gradient-to-t from-painel to-transparent" />
-                <div className="absolute top-3 left-3 flex gap-1.5">
-                  {s.destaque && <Badge cor="ouro">Destaque</Badge>}
+            <div
+              key={s.id}
+              className={`group animate-entrar rounded-2xl border border-borda bg-painel transition duration-300 hover:border-marca/40 ${s.ativo ? "" : "opacity-55"}`}
+            >
+              <div className="flex items-start justify-between p-4 pb-3">
+                <IconeServico nome={s.nome} />
+                <div className="flex gap-1.5">
+                  {s.destaque && <Badge cor="marca">Destaque</Badge>}
                   {!s.ativo && <Badge cor="vermelho">Inativo</Badge>}
                 </div>
               </div>
               <div className="p-4 pt-0">
                 <div className="flex items-start justify-between gap-2">
                   <p className="font-display text-lg tracking-wide">{s.nome}</p>
-                  <p className="font-display text-xl font-semibold text-ouro">{formatarMoeda(s.preco)}</p>
+                  <p className="font-display text-xl font-semibold text-texto">{formatarMoeda(s.preco)}</p>
                 </div>
                 <p className="mt-1 line-clamp-2 text-sm text-texto-2">{s.descricao}</p>
                 <div className="mt-3 flex items-center gap-3 border-t border-borda pt-3">
@@ -123,9 +126,10 @@ function FormServico({ inicial, aoFechar }: { inicial: ServicoForm; aoFechar: ()
           <Input type="number" min={5} step={5} required value={f.duracaoMin} onChange={(e) => setF({ ...f, duracaoMin: Number(e.target.value) })} />
         </Campo>
       </div>
-      <Campo rotulo="URL da foto" dica="Deixe em branco para usar uma imagem padrão.">
-        <Input value={f.foto} onChange={(e) => setF({ ...f, foto: e.target.value })} placeholder="https://..." />
-      </Campo>
+      <div className="group flex items-center gap-3 rounded-xl border border-borda bg-painel-2 p-3">
+        <IconeServico nome={f.nome || "Serviço"} tamanho="sm" />
+        <span className="text-sm text-texto-2">O ícone é escolhido automaticamente pelo nome do serviço.</span>
+      </div>
       <div className="flex items-center justify-between rounded-xl border border-borda bg-painel-2 p-3">
         <span className="text-sm">Mostrar como destaque na vitrine</span>
         <Interruptor ligado={f.destaque} aoMudar={(v) => setF({ ...f, destaque: v })} rotulo="Destaque" />

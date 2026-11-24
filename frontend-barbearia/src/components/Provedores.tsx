@@ -42,7 +42,7 @@ export function Provedores({ children }: { children: ReactNode }) {
         <p className="max-w-md text-sm text-texto-2">
           {estado}
           <br />
-          Endereço da API: <code className="text-ouro">{API_URL}</code>
+          Endereço da API: <code className="text-marca">{API_URL}</code>
         </p>
         <Botao
           onClick={() => {

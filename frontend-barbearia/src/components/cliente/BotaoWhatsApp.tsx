@@ -23,9 +23,9 @@ export function BotaoWhatsApp() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Falar no WhatsApp"
-      className="fixed right-4 bottom-24 z-30 grid size-14 place-items-center rounded-full bg-[#25d366] text-white shadow-xl shadow-black/50 transition hover:scale-110 lg:bottom-8"
+      className="fixed right-4 bottom-24 z-30 grid size-14 place-items-center rounded-full bg-marca-escuro text-white shadow-xl shadow-marca/30 transition hover:scale-110 hover:bg-marca lg:bottom-8"
     >
-      <span className="absolute inset-0 animate-ping rounded-full bg-[#25d366]/40 [animation-duration:2.5s]" />
+      <span className="absolute inset-0 animate-ping rounded-full bg-marca/30 [animation-duration:2.5s]" />
       <IconeWhatsApp className="relative size-7" />
     </a>
   );

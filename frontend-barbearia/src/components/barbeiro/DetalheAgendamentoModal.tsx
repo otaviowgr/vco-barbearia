@@ -90,7 +90,7 @@ export function DetalheAgendamentoModal({
               {pg.rotulo}
             </Badge>
             {a.descontoFidelidade && (
-              <Badge cor="ouro" icone={<Tag className="size-3" />}>
+              <Badge cor="marca" icone={<Tag className="size-3" />}>
                 Fidelidade −{formatarMoeda(a.desconto)}
               </Badge>
             )}
@@ -108,12 +108,12 @@ export function DetalheAgendamentoModal({
               <span className="flex items-center gap-1.5 text-xs text-texto-3">
                 <Clock className="size-3.5" /> {formatarDuracao(a.duracaoMin)} · {descreverPagamento(a)}
               </span>
-              <span className="font-display text-2xl font-semibold text-ouro">{formatarMoeda(a.valorFinal)}</span>
+              <span className="font-display text-2xl font-semibold text-marca">{formatarMoeda(a.valorFinal)}</span>
             </div>
           </div>
 
           <div className="flex items-center gap-3">
-            {barbeiro && <Avatar nome={barbeiro.nome} foto={barbeiro.foto} cor={barbeiro.cor} tamanho={36} />}
+            {barbeiro && <Avatar nome={barbeiro.nome} cor={barbeiro.cor} tamanho={36} />}
             <div className="min-w-0 flex-1 text-sm">
               <p className="text-texto-3">Barbeiro</p>
               <p className="font-medium">{barbeiro?.nome}</p>
@@ -121,7 +121,7 @@ export function DetalheAgendamentoModal({
             {cliente && (
               <div className="flex gap-2">
                 <a href={linkWhatsApp(cliente.telefone, mensagemWhatsApp(a, cliente, barbeiro))} target="_blank" rel="noopener noreferrer">
-                  <Botao tamanho="sm" variante="secundario" icone={<IconeWhatsApp className="size-4 text-[#25d366]" />}>
+                  <Botao tamanho="sm" variante="secundario" icone={<IconeWhatsApp className="size-4" />}>
                     WhatsApp
                   </Botao>
                 </a>
@@ -175,7 +175,7 @@ export function DetalheAgendamentoModal({
           {precisaPagar ? (
             <>
               <p className="text-sm text-texto-2">
-                O cliente vai pagar <b className="text-ouro">{formatarMoeda(a.valorFinal)}</b> na barbearia. Como foi o pagamento?
+                O cliente vai pagar <b className="text-marca">{formatarMoeda(a.valorFinal)}</b> na barbearia. Como foi o pagamento?
               </p>
               <div className="grid grid-cols-3 gap-2">
                 {METODOS.map((m) => (
@@ -183,7 +183,7 @@ export function DetalheAgendamentoModal({
                     key={m.valor}
                     onClick={() => setMetodo(m.valor)}
                     className={`flex flex-col items-center gap-2 rounded-xl border p-4 text-sm font-medium transition ${
-                      metodo === m.valor ? "border-ouro bg-ouro/10 text-ouro" : "border-borda bg-painel-2 text-texto-2 hover:border-ouro/40"
+                      metodo === m.valor ? "border-marca bg-marca/10 text-marca" : "border-borda bg-painel-2 text-texto-2 hover:border-marca/40"
                     }`}
                   >
                     {m.icone}

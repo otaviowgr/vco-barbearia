@@ -74,13 +74,13 @@ final class CatalogoDemo {
         return List.of(
                 new Barbeiro(BARBEIRO_DEMO_ID, "Carlos", "Cortes clássicos e barba",
                         "Fundador da VCO, 12 anos de navalha. Mestre na barba com toalha quente.",
-                        unsplash("photo-1500648767791-00dcc994a43e", 400), "(48) 99999-1234", "#d99a2b", true, true),
+                        unsplash("photo-1500648767791-00dcc994a43e", 400), "(48) 99999-1234", "#3b82f6", true, true),
                 new Barbeiro("brb-rafael", "Rafael Souza", "Degradê e freestyle",
                         "Especialista em fade e desenhos. Se tem risquinho, é com ele.",
-                        unsplash("photo-1507003211169-0a1dd7228f2d", 400), "(48) 98888-2222", "#2f9ad8", true, false),
+                        unsplash("photo-1507003211169-0a1dd7228f2d", 400), "(48) 98888-2222", "#94a3b8", true, false),
                 new Barbeiro("brb-lucas", "Lucas Mendes", "Pigmentação e visagismo",
                         "Visagista: analisa o formato do rosto para indicar o corte ideal.",
-                        unsplash("photo-1506794778202-cad84cf45f1d", 400), "(48) 97777-3333", "#e0607e", true, false));
+                        unsplash("photo-1506794778202-cad84cf45f1d", 400), "(48) 97777-3333", "#e4e4e7", true, false));
     }
 
     static List<Cliente> clientes() {

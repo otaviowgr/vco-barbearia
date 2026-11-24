@@ -4,36 +4,41 @@
   --font-sans: var(--font-corpo), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-titulo), ui-sans-serif, system-ui, sans-serif;
 
-  /* superfícies (preto/grafite) */
-  --color-fundo: #0a0a0b;
-  --color-painel: #131315;
-  --color-painel-2: #1b1b1e;
-  --color-painel-3: #242428;
-  --color-borda: #2b2b30;
-  --color-borda-forte: #3a3a40;
+  /* superfícies (preto / cinza) */
+  --color-fundo: #09090b;
+  --color-painel: #111113;
+  --color-painel-2: #18181b;
+  --color-painel-3: #222226;
+  --color-borda: #26262b;
+  --color-borda-forte: #3a3a41;
 
-  /* texto */
-  --color-texto: #f4f4f5;
-  --color-texto-2: #b4b4bc;
-  --color-texto-3: #7c7c86;
+  /* texto (branco / cinzas) */
+  --color-texto: #fafafa;
+  --color-texto-2: #a1a1aa;
+  --color-texto-3: #71717a;
 
-  /* destaque dourado/âmbar */
-  --color-ouro: #e8b04b;
-  --color-ouro-claro: #f5cd7a;
-  --color-ouro-escuro: #b9852a;
-  --color-ouro-fundo: #2a2113;
+  /* destaque azul
+     marca ........ ícones, preços, bordas e links sobre fundo escuro
+     marca-claro .. hover de textos em azul
+     marca-escuro . botões e itens selecionados (sempre com texto branco)
+     marca-fundo .. fundo levemente azulado */
+  --color-marca: #3b82f6;
+  --color-marca-claro: #60a5fa;
+  --color-marca-escuro: #2563eb;
+  --color-marca-fundo: #0b1630;
 
   /* status */
   --color-sucesso: #4ade80;
   --color-perigo: #f87171;
   --color-aviso: #fbbf24;
-  --color-info: #60a5fa;
+  --color-info: #93c5fd;
 
   --animate-entrar: entrar 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
   --animate-subir: subir 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
   --animate-escala: escala 0.25s cubic-bezier(0.22, 1, 0.36, 1) both;
   --animate-brilho: brilho 1.6s ease-in-out infinite;
-  --animate-pulso-ouro: pulso-ouro 2s ease-in-out infinite;
+  --animate-pulso-marca: pulso-marca 2s ease-in-out infinite;
+  --animate-balanco: balanco 0.7s cubic-bezier(0.36, 0, 0.3, 1);
 
   @keyframes entrar {
     from { opacity: 0; transform: translateY(8px); }
@@ -51,9 +56,17 @@
     0% { background-position: -400px 0; }
     100% { background-position: 400px 0; }
   }
-  @keyframes pulso-ouro {
-    0%, 100% { box-shadow: 0 0 0 0 rgb(232 176 75 / 0.55); }
-    50% { box-shadow: 0 0 0 6px rgb(232 176 75 / 0); }
+  @keyframes pulso-marca {
+    0%, 100% { box-shadow: 0 0 0 0 rgb(59 130 246 / 0.5); }
+    50% { box-shadow: 0 0 0 6px rgb(59 130 246 / 0); }
+  }
+  /* "balanço" do ícone do serviço ao passar o mouse */
+  @keyframes balanco {
+    0% { transform: rotate(0) scale(1); }
+    25% { transform: rotate(-14deg) scale(1.12); }
+    50% { transform: rotate(10deg) scale(1.12); }
+    75% { transform: rotate(-5deg) scale(1.1); }
+    100% { transform: rotate(0) scale(1.1); }
   }
 }
 
@@ -72,26 +85,33 @@ body {
 }
 
 ::selection {
-  background: rgb(232 176 75 / 0.35);
+  background: rgb(59 130 246 / 0.35);
 }
 
 /* barras de rolagem discretas */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #3a3a40 transparent;
+  scrollbar-color: #3a3a41 transparent;
 }
 
 .skeleton {
-  background: linear-gradient(90deg, #1b1b1e 0px, #2a2a2f 120px, #1b1b1e 240px);
+  background: linear-gradient(90deg, #18181b 0px, #26262b 120px, #18181b 240px);
   background-size: 800px 100%;
   animation: var(--animate-brilho);
 }
 
-.texto-ouro {
-  background: linear-gradient(135deg, #f5cd7a 0%, #e8b04b 45%, #b9852a 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+/* texto em azul (detalhe da marca) */
+.texto-marca {
+  color: var(--color-marca);
+}
+
+/* fundo minimalista: grade fina + brilho azul suave */
+.fundo-grade {
+  background-image:
+    radial-gradient(ellipse 60% 70% at 85% 0%, rgb(59 130 246 / 0.16), transparent 70%),
+    linear-gradient(rgb(255 255 255 / 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(255 255 255 / 0.035) 1px, transparent 1px);
+  background-size: 100% 100%, 40px 40px, 40px 40px;
 }
 
 .listras {

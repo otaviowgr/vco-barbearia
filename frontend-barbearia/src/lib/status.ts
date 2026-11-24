@@ -1,6 +1,6 @@
 import type { FormaPagamento, MetodoPagamento, StatusAgendamento, StatusPagamento } from "@/types";
 
-type Cor = "ouro" | "verde" | "vermelho" | "azul" | "cinza" | "amarelo" | "roxo";
+type Cor = "marca" | "verde" | "vermelho" | "azul" | "cinza" | "amarelo" | "roxo";
 
 export const STATUS_AGENDAMENTO: Record<StatusAgendamento, { rotulo: string; cor: Cor }> = {
   pendente: { rotulo: "Aguardando confirmação", cor: "amarelo" },

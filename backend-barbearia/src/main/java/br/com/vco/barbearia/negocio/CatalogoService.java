@@ -86,7 +86,7 @@ public class CatalogoService {
     @Transactional
     public Barbeiro criarBarbeiro(BarbeiroRequest r) {
         Barbeiro b = new Barbeiro(Util.gerarId("brb"), r.nome().trim(), r.especialidade(), r.bio(), r.foto(),
-                r.telefone(), r.cor() == null ? "#3fb37f" : r.cor(), r.ativo(), false);
+                r.telefone(), r.cor() == null ? "#60a5fa" : r.cor(), r.ativo(), false);
         return barbeiros.save(b);
     }
 

@@ -50,7 +50,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
       >
         {itens.map((t) => {
           const Icone = t.tipo === "sucesso" ? CheckCircle2 : t.tipo === "erro" ? XCircle : Info;
-          const cor = t.tipo === "sucesso" ? "text-sucesso" : t.tipo === "erro" ? "text-perigo" : "text-ouro";
+          const cor = t.tipo === "sucesso" ? "text-sucesso" : t.tipo === "erro" ? "text-perigo" : "text-marca";
           return (
             <div
               key={t.id}

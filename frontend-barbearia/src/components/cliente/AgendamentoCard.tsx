@@ -28,9 +28,9 @@ export function AgendamentoCard({
   const inativo = a.status === "cancelado" || a.status === "nao_compareceu";
 
   return (
-    <div className={`animate-entrar overflow-hidden rounded-2xl border bg-painel transition ${futuro ? "border-borda hover:border-ouro/30" : "border-borda"} ${inativo ? "opacity-70" : ""}`}>
+    <div className={`animate-entrar overflow-hidden rounded-2xl border bg-painel transition ${futuro ? "border-borda hover:border-marca/30" : "border-borda"} ${inativo ? "opacity-70" : ""}`}>
       <div className="flex gap-4 p-4">
-        <div className={`flex w-16 shrink-0 flex-col items-center justify-center rounded-xl py-2 ${futuro ? "bg-ouro/12 text-ouro" : "bg-painel-3 text-texto-2"}`}>
+        <div className={`flex w-16 shrink-0 flex-col items-center justify-center rounded-xl py-2 ${futuro ? "bg-marca/12 text-marca" : "bg-painel-3 text-texto-2"}`}>
           <span className="text-[11px] font-semibold uppercase">{nomeDiaCurto(d.getDay())}</span>
           <span className="font-display text-3xl leading-none font-semibold">{d.getDate()}</span>
           <span className="text-[11px] uppercase">{nomeMesCurto(d.getMonth())}</span>
@@ -39,7 +39,7 @@ export function AgendamentoCard({
           <div className="flex flex-wrap items-center gap-1.5">
             <Badge cor={st.cor}>{st.rotulo}</Badge>
             {!inativo && <Badge cor={pg.cor} icone={<CreditCard className="size-3" />}>{pg.rotulo}</Badge>}
-            {a.descontoFidelidade && <Badge cor="ouro" icone={<Tag className="size-3" />}>Fidelidade</Badge>}
+            {a.descontoFidelidade && <Badge cor="marca" icone={<Tag className="size-3" />}>Fidelidade</Badge>}
           </div>
           <p className="mt-1.5 truncate font-display text-lg font-medium tracking-wide">{a.servicos.map((s) => s.nome).join(" + ")}</p>
           <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-texto-2">
@@ -48,7 +48,7 @@ export function AgendamentoCard({
             </span>
             {barbeiro && (
               <span className="inline-flex items-center gap-1.5">
-                <Avatar nome={barbeiro.nome} foto={barbeiro.foto} tamanho={18} /> {barbeiro.nome}
+                <Avatar nome={barbeiro.nome} tamanho={18} /> {barbeiro.nome}
               </span>
             )}
           </div>
@@ -56,7 +56,7 @@ export function AgendamentoCard({
         </div>
         <div className="shrink-0 text-right">
           {a.desconto > 0 && <p className="text-xs text-texto-3 line-through">{formatarMoeda(a.valorOriginal)}</p>}
-          <p className="font-display text-xl font-semibold text-ouro">{formatarMoeda(a.valorFinal)}</p>
+          <p className="font-display text-xl font-semibold text-marca">{formatarMoeda(a.valorFinal)}</p>
         </div>
       </div>
       {(futuro && (aoRemarcar || aoCancelar)) || (!futuro && aoRepetir) ? (

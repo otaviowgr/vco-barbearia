@@ -39,7 +39,7 @@ export default function PaginaFidelidade() {
           { icone: Repeat, titulo: "Automático", texto: "O desconto aparece sozinho no resumo do agendamento." },
         ].map(({ icone: Icone, titulo, texto }) => (
           <div key={titulo} className="rounded-2xl border border-borda bg-painel p-4">
-            <Icone className="size-5 text-ouro" />
+            <Icone className="size-5 text-marca" />
             <p className="mt-2 font-display text-lg tracking-wide">{titulo}</p>
             <p className="text-sm text-texto-2">{texto}</p>
           </div>
@@ -49,7 +49,7 @@ export default function PaginaFidelidade() {
       <div className="rounded-2xl border border-borda bg-painel p-5">
         <div className="flex items-center justify-between">
           <p className="flex items-center gap-2 font-display text-lg tracking-wide uppercase">
-            <Sparkles className="size-4 text-ouro" /> Descontos já usados
+            <Sparkles className="size-4 text-marca" /> Descontos já usados
           </p>
           <span className="text-sm text-texto-2">
             Economia total: <b className="text-sucesso">{formatarMoeda(economia)}</b>

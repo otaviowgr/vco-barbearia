@@ -6,9 +6,9 @@ type Tamanho = "sm" | "md" | "lg";
 
 const VARIANTES: Record<Variante, string> = {
   primario:
-    "bg-gradient-to-b from-ouro-claro to-ouro text-fundo font-semibold shadow-lg shadow-ouro/15 hover:brightness-110 active:brightness-95",
+    "bg-marca-escuro text-white font-semibold shadow-lg shadow-marca/20 hover:bg-marca active:brightness-95",
   secundario: "bg-painel-3 text-texto hover:bg-borda-forte border border-borda",
-  contorno: "border border-ouro/50 text-ouro hover:bg-ouro/10",
+  contorno: "border border-marca/50 text-marca hover:bg-marca/10",
   fantasma: "text-texto-2 hover:text-texto hover:bg-painel-3",
   perigo: "bg-perigo/12 text-perigo border border-perigo/30 hover:bg-perigo/20",
   sucesso: "bg-sucesso/12 text-sucesso border border-sucesso/30 hover:bg-sucesso/20",
@@ -44,7 +44,7 @@ export function Botao({
     <button
       type={type}
       disabled={disabled || carregando}
-      className={`inline-flex items-center justify-center whitespace-nowrap font-medium transition-all duration-150 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ouro ${VARIANTES[variante]} ${TAMANHOS[tamanho]} ${largura === "total" ? "w-full" : ""} ${className}`}
+      className={`inline-flex items-center justify-center whitespace-nowrap font-medium transition-all duration-150 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-marca ${VARIANTES[variante]} ${TAMANHOS[tamanho]} ${largura === "total" ? "w-full" : ""} ${className}`}
       {...resto}
     >
       {carregando ? <Loader2 className="size-4 animate-spin" /> : icone}

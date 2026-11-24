@@ -57,8 +57,8 @@ export function GradeHorarios({
                   onClick={() => aoEscolher(s)}
                   className={`h-11 rounded-xl border text-sm font-semibold tabular-nums transition ${
                     valor === s.hora
-                      ? "scale-105 border-ouro bg-ouro text-fundo shadow-lg shadow-ouro/25"
-                      : "border-borda bg-painel-2 text-texto hover:border-ouro/50 hover:text-ouro"
+                      ? "scale-105 border-marca-escuro bg-marca-escuro text-white shadow-lg shadow-marca/25"
+                      : "border-borda bg-painel-2 text-texto hover:border-marca/50 hover:text-marca"
                   }`}
                 >
                   {s.hora}

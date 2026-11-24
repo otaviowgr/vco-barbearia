@@ -17,7 +17,7 @@ import {
 import type { PontoSerie, RankingBarbeiro } from "@/types";
 import { formatarMoeda } from "@/lib/formatadores";
 
-const OURO = "#e8b04b";
+const MARCA = "#3b82f6";
 const ANTERIOR = "#8b8b96";
 const GRADE = "#2b2b30";
 const TEXTO_EIXO = "#7c7c86";
@@ -79,7 +79,7 @@ export function GraficoFaturamento({
             iconSize={10}
             formatter={(v) => <span className="text-xs text-texto-2">{v}</span>}
           />
-          <Bar dataKey="valor" name={nomeAtual} fill={OURO} radius={[4, 4, 0, 0]} maxBarSize={28} animationDuration={700} />
+          <Bar dataKey="valor" name={nomeAtual} fill={MARCA} radius={[4, 4, 0, 0]} maxBarSize={28} animationDuration={700} />
           <Line
             dataKey="anterior"
             name={nomeAnterior}

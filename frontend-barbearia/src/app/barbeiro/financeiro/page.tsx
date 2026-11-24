@@ -173,7 +173,7 @@ export default function PaginaFinanceiro() {
       </div>
 
       <div className="grid gap-4 lg:grid-cols-[1.4fr_1fr]">
-        <Painel titulo="Ranking de barbeiros" subtitulo="Faturamento no período" icone={<Award className="size-4 text-ouro" />}>
+        <Painel titulo="Ranking de barbeiros" subtitulo="Faturamento no período" icone={<Award className="size-4 text-marca" />}>
           {ranking ? (
             ranking.length ? <GraficoRanking dados={ranking} /> : <p className="py-6 text-center text-sm text-texto-3">Sem atendimentos no período.</p>
           ) : (
@@ -196,7 +196,7 @@ export default function PaginaFinanceiro() {
                       <span className="w-12 text-right text-xs text-texto-3">{formatarPercentual(pct)}</span>
                     </div>
                     <div className="h-2 overflow-hidden rounded-full bg-painel-3">
-                      <div className="h-full rounded-full bg-ouro transition-[width] duration-700" style={{ width: `${pct * 100}%` }} />
+                      <div className="h-full rounded-full bg-marca transition-[width] duration-700" style={{ width: `${pct * 100}%` }} />
                     </div>
                   </div>
                 );
@@ -307,15 +307,15 @@ function Kpi({
 }) {
   const bom = delta != null && (inverterDelta ? delta < 0 : delta > 0);
   return (
-    <div className={`rounded-2xl border p-4 ${destaque ? "border-ouro/40 bg-gradient-to-br from-ouro-fundo to-painel" : "border-borda bg-painel"}`}>
-      <div className="flex items-center gap-2 text-xs tracking-wide text-texto-3 uppercase [&>svg]:size-4 [&>svg]:text-ouro">
+    <div className={`rounded-2xl border p-4 ${destaque ? "border-marca/40 bg-gradient-to-br from-marca-fundo to-painel" : "border-borda bg-painel"}`}>
+      <div className="flex items-center gap-2 text-xs tracking-wide text-texto-3 uppercase [&>svg]:size-4 [&>svg]:text-marca">
         {icone}
         {rotulo}
       </div>
       {valor === undefined ? (
         <Skeleton className="mt-2 h-8 w-28" />
       ) : (
-        <p className={`mt-1.5 truncate font-display font-semibold ${pequeno ? "text-xl" : "text-3xl"} ${destaque ? "text-ouro" : ""}`}>{valor}</p>
+        <p className={`mt-1.5 truncate font-display font-semibold ${pequeno ? "text-xl" : "text-3xl"} ${destaque ? "text-marca" : ""}`}>{valor}</p>
       )}
       {delta != null && Number.isFinite(delta) && (
         <p className={`mt-1 flex items-center gap-1 text-xs ${bom ? "text-sucesso" : "text-perigo"}`}>

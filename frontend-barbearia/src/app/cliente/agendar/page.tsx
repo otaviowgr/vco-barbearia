@@ -152,7 +152,7 @@ export default function PaginaAgendar() {
       <div className="mb-6">
         <button
           onClick={() => (etapa ? setEtapa(etapa - 1) : router.push("/cliente"))}
-          className="mb-3 inline-flex items-center gap-1 text-sm text-texto-2 hover:text-ouro"
+          className="mb-3 inline-flex items-center gap-1 text-sm text-texto-2 hover:text-marca"
         >
           <ArrowLeft className="size-4" /> {etapa ? "Voltar" : "Início"}
         </button>
@@ -173,7 +173,7 @@ export default function PaginaAgendar() {
             >
               <span
                 className={`block h-1.5 rounded-full transition-all duration-500 ${
-                  i < etapa ? "bg-ouro" : i === etapa ? "bg-gradient-to-r from-ouro to-ouro/40" : "bg-painel-3"
+                  i < etapa ? "bg-marca" : i === etapa ? "bg-gradient-to-r from-marca to-marca/40" : "bg-painel-3"
                 }`}
               />
               <span className={`mt-1.5 hidden text-[11px] sm:block ${i <= etapa ? "text-texto-2" : "text-texto-3"}`}>{nome}</span>
@@ -207,7 +207,7 @@ export default function PaginaAgendar() {
                 setSlot(undefined);
               }}
               icone={
-                <span className="grid size-14 place-items-center rounded-full bg-ouro/15 text-ouro">
+                <span className="grid size-14 place-items-center rounded-full bg-marca/15 text-marca">
                   <Users className="size-6" />
                 </span>
               }
@@ -222,7 +222,7 @@ export default function PaginaAgendar() {
                   setBarbeiroId(b.id);
                   setSlot(undefined);
                 }}
-                icone={<Avatar nome={b.nome} foto={b.foto} cor={b.cor} tamanho={56} />}
+                icone={<Avatar nome={b.nome} cor={b.cor} tamanho={56} />}
                 titulo={b.nome}
                 descricao={b.especialidade}
               />
@@ -247,7 +247,7 @@ export default function PaginaAgendar() {
                         setSlot(undefined);
                       }}
                       className={`flex w-16 shrink-0 flex-col items-center rounded-xl border py-2.5 transition md:w-auto ${
-                        sel ? "border-ouro bg-ouro text-fundo" : "border-borda bg-painel-2 hover:border-ouro/50"
+                        sel ? "border-marca-escuro bg-marca-escuro text-white" : "border-borda bg-painel-2 hover:border-marca/50"
                       }`}
                     >
                       <span className="text-[11px] font-semibold uppercase">{d === hoje() ? "Hoje" : nomeDiaCurto(dt.getDay())}</span>
@@ -341,14 +341,14 @@ export default function PaginaAgendar() {
                 </div>
               ))}
             </div>
-            <div className="flex flex-col rounded-2xl border border-ouro/30 bg-gradient-to-b from-ouro-fundo to-painel p-5">
+            <div className="flex flex-col rounded-2xl border border-marca/30 bg-gradient-to-b from-marca-fundo to-painel p-5">
               <div className="flex justify-between text-sm">
                 <span className="text-texto-2">Valor original</span>
                 <span className={desconto?.aplicado ? "text-texto-3 line-through" : ""}>{formatarMoeda(total)}</span>
               </div>
               <div className="mt-2 flex justify-between text-sm">
                 <span className="flex items-center gap-1.5 text-texto-2">
-                  <Gift className="size-4 text-ouro" /> Desconto fidelidade
+                  <Gift className="size-4 text-marca" /> Desconto fidelidade
                 </span>
                 {!desconto ? (
                   <Skeleton className="h-5 w-16" />
@@ -359,14 +359,14 @@ export default function PaginaAgendar() {
                 )}
               </div>
               {desconto?.aplicado && (
-                <p className="mt-2 animate-entrar rounded-lg bg-ouro/15 px-3 py-2 text-xs text-ouro-claro">
+                <p className="mt-2 animate-entrar rounded-lg bg-marca/15 px-3 py-2 text-xs text-marca-claro">
                   🎉 Você completou o plano fidelidade e ganhou {desconto.percentual}% de desconto!
                 </p>
               )}
               <div className="my-4 h-px bg-borda" />
               <div className="flex items-end justify-between">
                 <span className="text-sm text-texto-2">Total</span>
-                <span className="font-display text-4xl font-semibold text-ouro">{formatarMoeda(valorFinal)}</span>
+                <span className="font-display text-4xl font-semibold text-marca">{formatarMoeda(valorFinal)}</span>
               </div>
               <Botao className="mt-5" tamanho="lg" largura="total" carregando={criando && !pagando} onClick={confirmar} icone={<Check className="size-5" />}>
                 {pagamento === "na_barbearia" ? "Confirmar agendamento" : `Pagar e confirmar`}
@@ -387,7 +387,7 @@ export default function PaginaAgendar() {
                     {selecionados.length} serviço{selecionados.length > 1 ? "s" : ""} · {formatarDuracao(duracao)}
                     {slot && data ? ` · ${formatarDataAmigavel(data).split(",")[0]} ${slot.hora}` : ""}
                   </p>
-                  <p className="font-display text-2xl leading-tight font-semibold text-ouro">{formatarMoeda(total)}</p>
+                  <p className="font-display text-2xl leading-tight font-semibold text-marca">{formatarMoeda(total)}</p>
                 </>
               ) : (
                 <p className="text-sm text-texto-3">Selecione pelo menos um serviço</p>
@@ -414,7 +414,7 @@ export default function PaginaAgendar() {
 }
 
 function IconePag({ children }: { children: React.ReactNode }) {
-  return <span className="grid size-14 place-items-center rounded-2xl bg-painel-3 text-ouro">{children}</span>;
+  return <span className="grid size-14 place-items-center rounded-2xl bg-painel-3 text-marca">{children}</span>;
 }
 
 function OpcaoCard({
@@ -435,7 +435,7 @@ function OpcaoCard({
       onClick={aoClicar}
       aria-pressed={ativo}
       className={`flex w-full items-center gap-4 rounded-2xl border bg-painel p-4 text-left transition hover:-translate-y-0.5 ${
-        ativo ? "border-ouro ring-2 ring-ouro/30" : "border-borda hover:border-ouro/40"
+        ativo ? "border-marca ring-2 ring-marca/30" : "border-borda hover:border-marca/40"
       }`}
     >
       {icone}
@@ -443,7 +443,7 @@ function OpcaoCard({
         <span className="block font-display text-lg font-medium tracking-wide">{titulo}</span>
         <span className="block text-sm text-texto-2">{descricao}</span>
       </span>
-      <span className={`grid size-6 shrink-0 place-items-center rounded-full border transition ${ativo ? "border-ouro bg-ouro text-fundo" : "border-borda-forte"}`}>
+      <span className={`grid size-6 shrink-0 place-items-center rounded-full border transition ${ativo ? "border-marca-escuro bg-marca-escuro text-white" : "border-borda-forte"}`}>
         {ativo && <Check className="size-4" strokeWidth={3} />}
       </span>
     </button>
@@ -453,14 +453,14 @@ function OpcaoCard({
 function LinhaResumo({ icone, rotulo, valor }: { icone: React.ReactNode; rotulo: string; valor: string }) {
   return (
     <div className="flex items-center gap-3 text-sm">
-      <span className="grid size-8 place-items-center rounded-lg bg-painel-3 text-ouro">{icone}</span>
+      <span className="grid size-8 place-items-center rounded-lg bg-painel-3 text-marca">{icone}</span>
       <span className="text-texto-2">{rotulo}</span>
       <span className="ml-auto text-right font-medium">{valor}</span>
     </div>
   );
 }
 
-const CORES_CONFETE = ["#e8b04b", "#f5cd7a", "#ffffff", "#b9852a", "#4ade80"];
+const CORES_CONFETE = ["#3b82f6", "#60a5fa", "#ffffff", "#93c5fd", "#a1a1aa"];
 
 function Sucesso({ agendamento: a, barbeiro }: { agendamento: Agendamento; barbeiro?: { nome: string; foto: string; cor: string } }) {
   // posições do confete geradas uma vez
@@ -485,8 +485,8 @@ function Sucesso({ agendamento: a, barbeiro }: { agendamento: Agendamento; barbe
         ))}
       </div>
       <svg viewBox="0 0 56 56" className="size-28">
-        <circle className="check-circulo" cx="28" cy="28" r="26" fill="none" stroke="#e8b04b" strokeWidth="2.5" />
-        <path className="check-marca" fill="none" stroke="#e8b04b" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" d="M16 29l8 8 16-17" />
+        <circle className="check-circulo" cx="28" cy="28" r="26" fill="none" stroke="#3b82f6" strokeWidth="2.5" />
+        <path className="check-marca" fill="none" stroke="#3b82f6" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" d="M16 29l8 8 16-17" />
       </svg>
       <h1 className="mt-4 animate-entrar font-display text-3xl font-semibold tracking-wide uppercase [animation-delay:600ms]">Agendamento feito!</h1>
       <p className="mt-2 animate-entrar text-texto-2 [animation-delay:700ms]">
@@ -499,12 +499,12 @@ function Sucesso({ agendamento: a, barbeiro }: { agendamento: Agendamento; barbe
         </p>
         {barbeiro && (
           <p className="mt-3 flex items-center gap-2 text-sm">
-            <Avatar nome={barbeiro.nome} foto={barbeiro.foto} cor={barbeiro.cor} tamanho={28} /> com {barbeiro.nome}
+            <Avatar nome={barbeiro.nome} cor={barbeiro.cor} tamanho={28} /> com {barbeiro.nome}
           </p>
         )}
         <div className="mt-4 flex items-end justify-between border-t border-borda pt-3">
           <span className="text-sm text-texto-2">{a.statusPagamento === "pago" ? "Pago" : "A pagar na barbearia"}</span>
-          <span className="font-display text-2xl font-semibold text-ouro">{formatarMoeda(a.valorFinal)}</span>
+          <span className="font-display text-2xl font-semibold text-marca">{formatarMoeda(a.valorFinal)}</span>
         </div>
         {a.descontoFidelidade && <p className="mt-2 text-xs text-sucesso">Desconto fidelidade de {formatarMoeda(a.desconto)} aplicado.</p>}
       </div>

@@ -83,7 +83,7 @@ function Pix({ valor, aoAprovar }: { valor: number; aoAprovar: () => Promise<voi
   return (
     <div className="flex flex-col items-center text-center">
       <p className="text-sm text-texto-2">Valor a pagar</p>
-      <p className="font-display text-4xl font-semibold text-ouro">{formatarMoeda(valor)}</p>
+      <p className="font-display text-4xl font-semibold text-marca">{formatarMoeda(valor)}</p>
       <div className="mt-5 rounded-2xl bg-white p-4 shadow-xl shadow-black/40">
         {pix ? (
           <QRCodeSVG value={pix.codigo} size={190} level="M" fgColor="#0a0a0b" />
@@ -147,9 +147,9 @@ function Cartao({ valor, aoAprovar }: { valor: number; aoAprovar: () => Promise<
     <form onSubmit={pagar}>
       {/* cartão visual */}
       <div className="relative mx-auto aspect-[1.586] w-full max-w-xs overflow-hidden rounded-2xl bg-gradient-to-br from-zinc-700 via-zinc-800 to-black p-5 shadow-2xl shadow-black/60">
-        <div className="absolute -top-10 -right-10 size-40 rounded-full bg-ouro/20 blur-2xl" />
+        <div className="absolute -top-10 -right-10 size-40 rounded-full bg-marca/20 blur-2xl" />
         <div className="flex items-center justify-between">
-          <div className="h-7 w-10 rounded-md bg-gradient-to-br from-ouro-claro to-ouro-escuro" />
+          <div className="h-7 w-10 rounded-md bg-gradient-to-br from-marca-claro to-marca-escuro" />
           <CreditCard className="size-6 text-white/70" />
         </div>
         <p className="mt-6 font-mono text-lg tracking-widest text-white">{form.numero || "•••• •••• •••• ••••"}</p>

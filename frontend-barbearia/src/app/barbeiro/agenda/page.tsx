@@ -89,7 +89,7 @@ export default function PaginaAgenda() {
             fechado: !config.horarios[diaDaSemana(data)],
             cabecalho: (
               <div className="flex items-center gap-2">
-                <Avatar nome={b.nome} foto={b.foto} cor={b.cor} tamanho={30} />
+                <Avatar nome={b.nome} cor={b.cor} tamanho={30} />
                 <div className="min-w-0">
                   <p className="truncate text-sm font-semibold">{primeiroNome(b.nome)}</p>
                   <p className="text-[11px] text-texto-3">{qtd} agendamento{qtd === 1 ? "" : "s"}</p>
@@ -109,7 +109,7 @@ export default function PaginaAgenda() {
             fechado: !config.horarios[dt.getDay()],
             cabecalho: (
               <button onClick={() => { setData(d); setModo("dia"); }} className="flex w-full items-center gap-2 text-left">
-                <span className={`grid size-9 place-items-center rounded-lg font-display text-lg font-semibold ${ehHoje ? "bg-ouro text-fundo" : "bg-painel-3"}`}>
+                <span className={`grid size-9 place-items-center rounded-lg font-display text-lg font-semibold ${ehHoje ? "bg-marca-escuro text-white" : "bg-painel-3"}`}>
                   {dt.getDate()}
                 </span>
                 <span>
@@ -166,9 +166,9 @@ export default function PaginaAgenda() {
 
       {/* Novos agendamentos */}
       {!!novos?.length && (
-        <div className="mb-4 animate-entrar rounded-2xl border border-ouro/40 bg-ouro/[0.07] p-3.5">
+        <div className="mb-4 animate-entrar rounded-2xl border border-marca/40 bg-marca/[0.07] p-3.5">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="grid size-8 animate-pulso-ouro place-items-center rounded-full bg-ouro text-fundo">
+            <span className="grid size-8 animate-pulso-marca place-items-center rounded-full bg-marca-escuro text-white">
               <Bell className="size-4" />
             </span>
             <p className="font-semibold">
@@ -176,7 +176,7 @@ export default function PaginaAgenda() {
             </p>
             <button
               onClick={() => agendamentoService.marcarComoVistos(novos.map((n) => n.id))}
-              className="ml-auto text-xs text-texto-2 underline-offset-2 hover:text-ouro hover:underline"
+              className="ml-auto text-xs text-texto-2 underline-offset-2 hover:text-marca hover:underline"
             >
               Marcar todos como vistos
             </button>
@@ -190,7 +190,7 @@ export default function PaginaAgenda() {
                   setData(n.data);
                   abrir(n);
                 }}
-                className="shrink-0 rounded-xl border border-borda bg-painel px-3 py-2 text-left transition hover:border-ouro/60"
+                className="shrink-0 rounded-xl border border-borda bg-painel px-3 py-2 text-left transition hover:border-marca/60"
               >
                 <p className="text-sm font-semibold">{mapaClientes.get(n.clienteId)?.nome ?? "Cliente"}</p>
                 <p className="text-xs text-texto-2">
@@ -255,11 +255,11 @@ export default function PaginaAgenda() {
           { r: "Agendamentos", v: String(validos.length) },
           { r: "A confirmar", v: String(pendentes), destaque: pendentes > 0 },
           { r: "Previsto", v: formatarMoeda(previsto) },
-          { r: "Já recebido", v: formatarMoeda(recebido), ouro: true },
+          { r: "Já recebido", v: formatarMoeda(recebido), marca: true },
         ].map((k) => (
           <div key={k.r} className="rounded-xl border border-borda bg-painel px-3.5 py-2.5">
             <p className="text-[11px] tracking-wide text-texto-3 uppercase">{k.r}</p>
-            <p className={`font-display text-xl font-semibold ${k.ouro ? "text-ouro" : k.destaque ? "text-aviso" : ""}`}>{k.v}</p>
+            <p className={`font-display text-xl font-semibold ${k.marca ? "text-marca" : k.destaque ? "text-aviso" : ""}`}>{k.v}</p>
           </div>
         ))}
       </div>

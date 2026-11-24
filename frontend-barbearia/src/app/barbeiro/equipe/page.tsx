@@ -11,7 +11,8 @@ import { Modal } from "@/components/ui/Modal";
 import { useToast } from "@/components/ui/Toast";
 import { formatarTelefone } from "@/lib/formatadores";
 
-const CORES = ["#d99a2b", "#2f9ad8", "#e0607e", "#3fb37f", "#9b7bea", "#e07b39"];
+// cores de identificação na agenda, dentro do tema (azuis, cinzas e branco)
+const CORES = ["#3b82f6", "#94a3b8", "#e4e4e7", "#60a5fa", "#1d4ed8", "#71717a"];
 const VAZIO: BarbeiroForm = { nome: "", especialidade: "", bio: "", foto: "", telefone: "", cor: CORES[3], ativo: true };
 
 export default function PaginaEquipe() {
@@ -45,12 +46,12 @@ export default function PaginaEquipe() {
           : barbeiros.map((b) => (
               <div key={b.id} className={`animate-entrar rounded-2xl border border-borda bg-painel p-5 transition ${b.ativo ? "" : "opacity-55"}`}>
                 <div className="flex items-start gap-4">
-                  <Avatar nome={b.nome} foto={b.foto} cor={b.cor} tamanho={64} />
+                  <Avatar nome={b.nome} cor={b.cor} tamanho={64} />
                   <div className="min-w-0 flex-1">
                     <p className="font-display text-xl tracking-wide">{b.nome}</p>
-                    <p className="text-sm text-ouro">{b.especialidade}</p>
+                    <p className="text-sm text-marca">{b.especialidade}</p>
                     <div className="mt-1.5 flex flex-wrap gap-1.5">
-                      {b.temLogin && <Badge cor="ouro" icone={<ShieldCheck className="size-3" />}>Admin</Badge>}
+                      {b.temLogin && <Badge cor="marca" icone={<ShieldCheck className="size-3" />}>Admin</Badge>}
                       {!b.ativo && <Badge cor="vermelho">Inativo</Badge>}
                       <span className="inline-flex items-center gap-1 text-xs text-texto-3">
                         <span className="size-2.5 rounded-full" style={{ background: b.cor }} /> cor na agenda
@@ -102,7 +103,7 @@ function FormBarbeiro({ inicial, aoFechar }: { inicial: BarbeiroForm; aoFechar: 
       }}
     >
       <div className="flex items-center gap-4">
-        <Avatar nome={f.nome || "?"} foto={f.foto} cor={f.cor} tamanho={56} />
+        <Avatar nome={f.nome || "?"} cor={f.cor} tamanho={56} />
         <div className="flex-1">
           <Campo rotulo="Nome">
             <Input required value={f.nome} onChange={(e) => setF({ ...f, nome: e.target.value })} />
@@ -115,14 +116,9 @@ function FormBarbeiro({ inicial, aoFechar }: { inicial: BarbeiroForm; aoFechar: 
       <Campo rotulo="Apresentação">
         <Textarea rows={2} value={f.bio} onChange={(e) => setF({ ...f, bio: e.target.value })} />
       </Campo>
-      <div className="grid grid-cols-2 gap-3">
-        <Campo rotulo="Telefone">
-          <Input value={f.telefone} onChange={(e) => setF({ ...f, telefone: formatarTelefone(e.target.value) })} inputMode="tel" />
-        </Campo>
-        <Campo rotulo="URL da foto">
-          <Input value={f.foto} onChange={(e) => setF({ ...f, foto: e.target.value })} placeholder="https://..." />
-        </Campo>
-      </div>
+      <Campo rotulo="Telefone">
+        <Input value={f.telefone} onChange={(e) => setF({ ...f, telefone: formatarTelefone(e.target.value) })} inputMode="tel" />
+      </Campo>
       <div>
         <span className="mb-1.5 block text-xs font-medium tracking-wide text-texto-2 uppercase">Cor na agenda</span>
         <div className="flex gap-2">

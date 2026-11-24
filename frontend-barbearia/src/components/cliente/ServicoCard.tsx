@@ -4,7 +4,7 @@ import { Check, Clock } from "lucide-react";
 import type { Servico } from "@/types";
 import { formatarDuracao } from "@/lib/datas";
 import { formatarMoeda } from "@/lib/formatadores";
-import { Imagem } from "../ui/basicos";
+import { IconeServico } from "./IconeServico";
 
 export function ServicoCard({
   servico,
@@ -23,23 +23,22 @@ export function ServicoCard({
       type="button"
       onClick={aoClicar}
       aria-pressed={selecionavel ? selecionado : undefined}
-      className={`group relative flex w-full overflow-hidden rounded-2xl border bg-painel text-left transition duration-200 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-black/40 ${
-        compacto ? "flex-row" : "flex-col"
-      } ${selecionado ? "border-ouro ring-2 ring-ouro/30" : "border-borda hover:border-ouro/40"}`}
+      className={`group relative flex w-full gap-4 rounded-2xl border bg-painel p-4 text-left transition duration-300 hover:-translate-y-0.5 hover:bg-painel-2/60 ${
+        compacto ? "flex-row items-start" : "flex-col"
+      } ${selecionado ? "border-marca ring-2 ring-marca/30" : "border-borda hover:border-marca/40"}`}
     >
-      <div className={`relative shrink-0 overflow-hidden ${compacto ? "w-28 sm:w-32" : "aspect-[16/10] w-full"}`}>
-        <Imagem src={servico.foto} alt={servico.nome} className="size-full transition duration-500 group-hover:scale-105" />
-        {!compacto && <div className="absolute inset-0 bg-gradient-to-t from-painel via-transparent to-transparent" />}
+      <div className={`flex items-start justify-between ${compacto ? "" : "w-full"}`}>
+        <IconeServico nome={servico.nome} tamanho={compacto ? "sm" : "md"} ativo={selecionado} />
         {servico.destaque && !compacto && (
-          <span className="absolute top-3 left-3 rounded-full bg-fundo/80 px-2.5 py-1 text-[11px] font-semibold tracking-wide text-ouro uppercase backdrop-blur">
+          <span className="rounded-full border border-marca/30 px-2.5 py-1 text-[11px] font-medium tracking-wide text-marca uppercase">
             Mais pedido
           </span>
         )}
       </div>
-      <div className={`flex flex-1 flex-col ${compacto ? "p-3.5" : "p-4 pt-1"}`}>
+      <div className="flex min-w-0 flex-1 flex-col self-stretch">
         <div className="flex items-start justify-between gap-3">
           <h3 className="font-display text-lg leading-tight font-medium tracking-wide">{servico.nome}</h3>
-          <span className="shrink-0 font-display text-xl font-semibold text-ouro">{formatarMoeda(servico.preco)}</span>
+          <span className="shrink-0 font-display text-xl font-semibold text-texto">{formatarMoeda(servico.preco)}</span>
         </div>
         <p className={`mt-1.5 text-sm text-texto-2 ${compacto ? "line-clamp-2" : "line-clamp-3"}`}>{servico.descricao}</p>
         <div className="mt-auto flex items-center justify-between pt-3">
@@ -49,7 +48,7 @@ export function ServicoCard({
           {selecionavel && (
             <span
               className={`grid size-6 place-items-center rounded-full border transition ${
-                selecionado ? "scale-110 border-ouro bg-ouro text-fundo" : "border-borda-forte text-transparent"
+                selecionado ? "scale-110 border-marca-escuro bg-marca-escuro text-white" : "border-borda-forte text-transparent"
               }`}
             >
               <Check className="size-4" strokeWidth={3} />

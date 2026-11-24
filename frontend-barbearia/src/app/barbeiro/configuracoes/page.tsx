@@ -26,7 +26,7 @@ export default function Configuracoes() {
 function Secao({ icone, titulo, children }: { icone: React.ReactNode; titulo: string; children: React.ReactNode }) {
   return (
     <section className="rounded-2xl border border-borda bg-painel p-5">
-      <h2 className="mb-4 flex items-center gap-2 font-display text-lg tracking-wide uppercase [&>svg]:size-5 [&>svg]:text-ouro">
+      <h2 className="mb-4 flex items-center gap-2 font-display text-lg tracking-wide uppercase [&>svg]:size-5 [&>svg]:text-marca">
         {icone}
         {titulo}
       </h2>
@@ -120,7 +120,7 @@ function Form({ inicial }: { inicial: ConfigBarbearia }) {
           </Campo>
         </div>
         <p className="mt-3 text-sm text-texto-2">
-          A cada <b className="text-ouro">{c.fidelidade.meta}</b> atendimentos concluídos, o cliente ganha <b className="text-ouro">{c.fidelidade.percentual}%</b> de desconto no próximo.
+          A cada <b className="text-marca">{c.fidelidade.meta}</b> atendimentos concluídos, o cliente ganha <b className="text-marca">{c.fidelidade.percentual}%</b> de desconto no próximo.
         </p>
       </Secao>
 
