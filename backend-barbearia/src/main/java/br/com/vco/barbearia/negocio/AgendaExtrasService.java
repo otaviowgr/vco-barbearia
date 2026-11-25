@@ -17,7 +17,7 @@ import br.com.vco.barbearia.repositorio.DespesaRepository;
 import br.com.vco.barbearia.util.Util;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+//REGRA DE NEGOCIOS
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;

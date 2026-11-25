@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
-
+//COMUNICAÇOES COM O BANCO
 public interface AgendamentoRepository extends JpaRepository<Agendamento, String>, JpaSpecificationExecutor<Agendamento> {
 
     List<Agendamento> findByData(LocalDate data);

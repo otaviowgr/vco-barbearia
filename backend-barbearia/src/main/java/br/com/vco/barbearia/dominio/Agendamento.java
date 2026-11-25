@@ -19,7 +19,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OrderColumn;
 import jakarta.persistence.Table;
 import org.hibernate.annotations.BatchSize;
-
+//ENTIDADES
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.LocalDate;

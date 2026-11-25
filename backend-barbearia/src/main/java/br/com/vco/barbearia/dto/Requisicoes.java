@@ -19,7 +19,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
-
+//COMUNICAÇOES ESPECIFICAS
 /** Corpos (JSON) recebidos pela API, já com as regras de validação. */
 public final class Requisicoes {
 
