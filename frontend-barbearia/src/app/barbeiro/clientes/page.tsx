@@ -38,7 +38,7 @@ export default function PaginaClientes() {
       </div>
 
       {carregando && !clientes ? (
-        <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
           {Array.from({ length: 6 }, (_, i) => (
             <Skeleton key={i} className="h-28" />
           ))}
@@ -46,7 +46,7 @@ export default function PaginaClientes() {
       ) : !clientes?.length ? (
         <EstadoVazio icone={<Users className="size-6" />} titulo="Nenhum cliente encontrado" descricao="Tente buscar por outro nome ou telefone." />
       ) : (
-        <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
           {clientes.map((c) => (
             <button
               key={c.id}
@@ -109,18 +109,19 @@ function FichaModal({ id, aoFechar }: { id: string | null; aoFechar: () => void 
                 <Phone className="size-3.5" /> {ficha.telefone}
               </p>
               {ficha.email && (
-                <p className="flex items-center gap-1.5 text-sm text-texto-2">
-                  <Mail className="size-3.5" /> {ficha.email}
+                <p className="flex min-w-0 items-center gap-1.5 text-sm text-texto-2">
+                  <Mail className="size-3.5 shrink-0" /> <span className="truncate">{ficha.email}</span>
                 </p>
               )}
             </div>
-            <div className="flex w-full gap-2 sm:w-auto">
-              <a href={linkWhatsApp(ficha.telefone, msg)} target="_blank" rel="noopener noreferrer" className="flex-1">
+            <div className="grid w-full grid-cols-2 gap-2 sm:flex sm:w-auto">
+              <a href={linkWhatsApp(ficha.telefone, msg)} target="_blank" rel="noopener noreferrer" className="min-w-0 sm:flex-1">
                 <Botao largura="total" icone={<IconeWhatsApp className="size-4" />}>
-                  Chamar no WhatsApp
+                  <span className="sm:hidden">WhatsApp</span>
+                  <span className="hidden sm:inline">Chamar no WhatsApp</span>
                 </Botao>
               </a>
-              <a href={`tel:${ficha.telefone.replace(/\D/g, "")}`} className="flex-1">
+              <a href={`tel:${ficha.telefone.replace(/\D/g, "")}`} className="min-w-0 sm:flex-1">
                 <Botao largura="total" variante="secundario" icone={<Phone className="size-4" />}>
                   Ligar
                 </Botao>
@@ -143,7 +144,7 @@ function FichaModal({ id, aoFechar }: { id: string | null; aoFechar: () => void 
           </div>
 
           <div className="rounded-xl border border-marca/30 bg-marca/5 p-4">
-            <div className="flex items-center justify-between text-sm">
+            <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 text-sm">
               <span className="flex items-center gap-1.5 font-medium">
                 <Crown className="size-4 text-marca" /> Fidelidade
               </span>
@@ -165,13 +166,13 @@ function FichaModal({ id, aoFechar }: { id: string | null; aoFechar: () => void 
             <div className="max-h-72 divide-y divide-borda overflow-y-auto rounded-xl border border-borda">
               {ficha.historico.length === 0 && <p className="p-4 text-sm text-texto-3">Sem agendamentos ainda.</p>}
               {ficha.historico.map((a) => (
-                <div key={a.id} className="flex items-center gap-3 px-3.5 py-2.5 text-sm">
-                  <span className="w-20 shrink-0 text-texto-2 tabular-nums">{formatarData(a.data)}</span>
+                <div key={a.id} className="flex items-center gap-2 px-3 py-2.5 text-sm sm:gap-3 sm:px-3.5">
+                  <span className="shrink-0 text-xs text-texto-2 tabular-nums sm:w-20 sm:text-sm">{formatarData(a.data)}</span>
                   <span className="min-w-0 flex-1 truncate">{a.servicos.map((s) => s.nome).join(" + ")}</span>
-                  <Badge cor={STATUS_AGENDAMENTO[a.status].cor} className="hidden sm:inline-flex">
-                    {STATUS_AGENDAMENTO[a.status].rotulo}
-                  </Badge>
-                  <span className="w-20 shrink-0 text-right font-medium">{formatarMoeda(a.valorFinal)}</span>
+                  <span className="hidden sm:inline-flex">
+                    <Badge cor={STATUS_AGENDAMENTO[a.status].cor}>{STATUS_AGENDAMENTO[a.status].rotulo}</Badge>
+                  </span>
+                  <span className="shrink-0 text-right font-medium whitespace-nowrap sm:w-20">{formatarMoeda(a.valorFinal)}</span>
                 </div>
               ))}
             </div>

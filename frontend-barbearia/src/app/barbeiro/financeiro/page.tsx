@@ -93,6 +93,7 @@ export default function PaginaFinanceiro() {
       {/* Filtros (uma linha) */}
       <div className="flex flex-wrap items-center gap-2 rounded-2xl border border-borda bg-painel p-3">
         <Segmentado
+          className="w-full sm:w-auto"
           valor={tipo}
           aoMudar={setTipo}
           opcoes={[
@@ -123,8 +124,8 @@ export default function PaginaFinanceiro() {
             <InputData type="date" value={ate} onChange={setAte} />
           </>
         )}
-        <div className="ml-auto flex flex-wrap gap-2">
-          <Select value={barbeiroId} onChange={(e) => setBarbeiroId(e.target.value)} className="!h-10 !w-auto" aria-label="Filtrar por barbeiro">
+        <div className="grid w-full grid-cols-1 gap-2 min-[420px]:grid-cols-2 sm:ml-auto sm:flex sm:w-auto">
+          <Select value={barbeiroId} onChange={(e) => setBarbeiroId(e.target.value)} className="!h-10 sm:!w-auto" aria-label="Filtrar por barbeiro">
             <option value="">Todos os barbeiros</option>
             {barbeiros?.map((b) => (
               <option key={b.id} value={b.id}>
@@ -132,7 +133,7 @@ export default function PaginaFinanceiro() {
               </option>
             ))}
           </Select>
-          <Select value={metodo} onChange={(e) => setMetodo(e.target.value as MetodoPagamento | "")} className="!h-10 !w-auto" aria-label="Filtrar por forma de pagamento">
+          <Select value={metodo} onChange={(e) => setMetodo(e.target.value as MetodoPagamento | "")} className="!h-10 sm:!w-auto" aria-label="Filtrar por forma de pagamento">
             <option value="">Todas as formas</option>
             <option value="pix">Pix</option>
             <option value="cartao">Cartão</option>
@@ -149,13 +150,13 @@ export default function PaginaFinanceiro() {
       )}
 
       {/* KPIs principais */}
-      <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
         <Kpi destaque icone={<Wallet />} rotulo="Faturamento" valor={a && formatarMoeda(a.faturamento)} delta={a && ant && variacao(a.faturamento, ant.faturamento)} />
         <Kpi icone={<Users />} rotulo="Atendimentos" valor={a && String(a.atendimentos)} delta={a && ant && variacao(a.atendimentos, ant.atendimentos)} />
         <Kpi icone={<Receipt />} rotulo="Ticket médio" valor={a && formatarMoeda(a.ticketMedio)} delta={a && ant && variacao(a.ticketMedio, ant.ticketMedio)} />
         <CardLucro resumo={a} />
       </div>
-      <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-3 min-[400px]:grid-cols-2 lg:grid-cols-4">
         <Kpi pequeno icone={<Scissors />} rotulo="Mais vendido" valor={a && (a.servicoMaisVendido ? `${a.servicoMaisVendido.nome}` : "—")} extra={a?.servicoMaisVendido ? `${a.servicoMaisVendido.quantidade}× no período` : undefined} />
         <Kpi pequeno icone={<UserX />} rotulo="Taxa de faltas" valor={a && formatarPercentual(a.taxaFaltas, 1)} delta={a && ant && variacao(a.taxaFaltas, ant.taxaFaltas)} inverterDelta />
         <Kpi pequeno icone={<Tag />} rotulo="Descontos fidelidade" valor={a && formatarMoeda(a.descontos)} />
@@ -163,7 +164,7 @@ export default function PaginaFinanceiro() {
       </div>
 
       {/* Gráficos */}
-      <div className="grid gap-4 xl:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
         <Painel titulo={`Faturamento por dia · ${nomeMes(dMes.getMonth())} ${dMes.getFullYear()}`} subtitulo="Barras: mês selecionado · linha tracejada: mês anterior">
           {porDia ? <GraficoFaturamento dados={porDia} nomeAtual={nomeMes(dMes.getMonth())} nomeAnterior="Mês anterior" prefixoRotulo="Dia " /> : <Skeleton className="h-72" />}
         </Painel>
@@ -172,7 +173,7 @@ export default function PaginaFinanceiro() {
         </Painel>
       </div>
 
-      <div className="grid gap-4 lg:grid-cols-[1.4fr_1fr]">
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
         <Painel titulo="Ranking de barbeiros" subtitulo="Faturamento no período" icone={<Award className="size-4 text-marca" />}>
           {ranking ? (
             ranking.length ? <GraficoRanking dados={ranking} /> : <p className="py-6 text-center text-sm text-texto-3">Sem atendimentos no período.</p>
@@ -225,11 +226,13 @@ export default function PaginaFinanceiro() {
         ) : (
           <div className="max-h-80 divide-y divide-borda overflow-y-auto">
             {despesas.map((d) => (
-              <div key={d.id} className="group flex items-center gap-3 py-2.5 text-sm">
-                <span className="w-20 shrink-0 text-texto-3 tabular-nums">{formatarData(d.data)}</span>
+              <div key={d.id} className="group flex items-center gap-2 py-2.5 text-sm sm:gap-3">
+                <span className="shrink-0 text-xs text-texto-3 tabular-nums sm:w-20 sm:text-sm">{formatarData(d.data)}</span>
                 <span className="min-w-0 flex-1 truncate">{d.descricao}</span>
-                <Badge className="hidden sm:inline-flex">{CATEGORIAS[d.categoria]}</Badge>
-                <span className="w-24 text-right font-medium text-perigo">− {formatarMoeda(d.valor)}</span>
+                <span className="hidden sm:inline-flex">
+                  <Badge>{CATEGORIAS[d.categoria]}</Badge>
+                </span>
+                <span className="shrink-0 text-right font-medium whitespace-nowrap text-perigo sm:w-24">− {formatarMoeda(d.valor)}</span>
                 <button onClick={() => setRemovendo(d.id)} className="rounded-md p-1 text-texto-3 opacity-60 transition group-hover:opacity-100 hover:text-perigo" aria-label="Remover despesa">
                   <Trash2 className="size-4" />
                 </button>

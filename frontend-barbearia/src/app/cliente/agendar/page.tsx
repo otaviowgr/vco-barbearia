@@ -187,7 +187,7 @@ export default function PaginaAgendar() {
         {etapa === 0 && (
           <>
             <p className="mb-4 text-sm text-texto-2">Escolha um ou mais serviços — o preço e o tempo são somados automaticamente.</p>
-            <div className="grid gap-3 md:grid-cols-2">
+            <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
               {!servicos
                 ? Array.from({ length: 6 }, (_, i) => <Skeleton key={i} className="h-32" />)
                 : servicos.map((s) => (
@@ -199,7 +199,7 @@ export default function PaginaAgendar() {
 
         {/* 2. Barbeiro */}
         {etapa === 1 && (
-          <div className="grid gap-3 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             <OpcaoCard
               ativo={barbeiroId === null}
               aoClicar={() => {
@@ -232,8 +232,8 @@ export default function PaginaAgendar() {
 
         {/* 3. Data */}
         {etapa === 2 && (
-          <div className="grid gap-5 md:grid-cols-[1fr_1.2fr]">
-            <div>
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
+            <div className="min-w-0">
               <p className="mb-3 text-sm text-texto-2">Próximos dias</p>
               <div className="sem-scroll -mx-4 flex gap-2 overflow-x-auto px-4 pb-1 md:mx-0 md:grid md:grid-cols-4 md:px-0">
                 {proximosDias.map((d) => {
@@ -284,7 +284,7 @@ export default function PaginaAgendar() {
         {etapa === 4 && (
           <div className="space-y-3">
             <p className="text-xs font-semibold tracking-widest text-texto-3 uppercase">Pagar agora</p>
-            <div className="grid gap-3 sm:grid-cols-2">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               <OpcaoCard
                 ativo={pagamento === "pix"}
                 aoClicar={() => setPagamento("pix")}
@@ -313,7 +313,7 @@ export default function PaginaAgendar() {
 
         {/* 6. Resumo */}
         {etapa === 5 && data && slot && (
-          <div className="grid gap-4 md:grid-cols-[1.3fr_1fr]">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)]">
             <div className="space-y-3 rounded-2xl border border-borda bg-painel p-5">
               <LinhaResumo icone={<CalendarDays className="size-4" />} rotulo="Data" valor={formatarDataAmigavel(data)} />
               <LinhaResumo icone={<Clock className="size-4" />} rotulo="Horário" valor={`${slot.hora} · ${formatarDuracao(duracao)}`} />

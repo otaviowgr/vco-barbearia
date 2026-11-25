@@ -87,7 +87,7 @@ export default function VitrineCliente() {
       </section>
 
       {/* Próximo agendamento + fidelidade */}
-      <section className="grid gap-4 lg:grid-cols-2">
+      <section className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <div>
           <h2 className="mb-3 text-xs font-semibold tracking-widest text-texto-3 uppercase">Seu próximo horário</h2>
           {!proximos ? (
@@ -125,7 +125,7 @@ export default function VitrineCliente() {
             <h2 className="mt-1 font-display text-3xl font-semibold tracking-wide uppercase">Os mais pedidos</h2>
           </div>
         </div>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {!servicos
             ? Array.from({ length: 4 }, (_, i) => <Skeleton key={i} className="h-80" />)
             : destaques.map((s, i) => (
@@ -137,7 +137,7 @@ export default function VitrineCliente() {
         {outros.length > 0 && (
           <>
             <h3 className="mt-8 mb-3 font-display text-xl tracking-wide uppercase text-texto-2">Complementos</h3>
-            <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
               {outros.map((s) => (
                 <ServicoCard key={s.id} servico={s} compacto aoClicar={() => router.push(`/cliente/agendar?servicos=${s.id}`)} />
               ))}
@@ -150,7 +150,7 @@ export default function VitrineCliente() {
       <section>
         <p className="text-xs font-semibold tracking-widest text-marca uppercase">Nossa equipe</p>
         <h2 className="mt-1 mb-5 font-display text-3xl font-semibold tracking-wide uppercase">Quem cuida de você</h2>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {!barbeiros
             ? Array.from({ length: 3 }, (_, i) => <Skeleton key={i} className="h-28" />)
             : barbeiros.map((b) => (
@@ -167,7 +167,7 @@ export default function VitrineCliente() {
       </section>
 
       {/* Sobre */}
-      <section className="grid gap-4 rounded-3xl border border-borda bg-painel p-6 sm:p-8 lg:grid-cols-[1.3fr_1fr]">
+      <section className="grid grid-cols-1 gap-4 rounded-3xl border border-borda bg-painel p-6 sm:p-8 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)]">
         <div>
           <p className="text-xs font-semibold tracking-widest text-marca uppercase">Sobre a barbearia</p>
           <h2 className="mt-1 font-display text-3xl font-semibold tracking-wide uppercase">{config.nome}</h2>

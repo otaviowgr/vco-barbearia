@@ -29,8 +29,8 @@ export function AgendamentoCard({
 
   return (
     <div className={`animate-entrar overflow-hidden rounded-2xl border bg-painel transition ${futuro ? "border-borda hover:border-marca/30" : "border-borda"} ${inativo ? "opacity-70" : ""}`}>
-      <div className="flex gap-4 p-4">
-        <div className={`flex w-16 shrink-0 flex-col items-center justify-center rounded-xl py-2 ${futuro ? "bg-marca/12 text-marca" : "bg-painel-3 text-texto-2"}`}>
+      <div className="flex gap-3 p-4 sm:gap-4">
+        <div className={`flex w-14 shrink-0 flex-col items-center justify-center self-start rounded-xl py-2 sm:w-16 ${futuro ? "bg-marca/12 text-marca" : "bg-painel-3 text-texto-2"}`}>
           <span className="text-[11px] font-semibold uppercase">{nomeDiaCurto(d.getDay())}</span>
           <span className="font-display text-3xl leading-none font-semibold">{d.getDate()}</span>
           <span className="text-[11px] uppercase">{nomeMesCurto(d.getMonth())}</span>
@@ -41,9 +41,9 @@ export function AgendamentoCard({
             {!inativo && <Badge cor={pg.cor} icone={<CreditCard className="size-3" />}>{pg.rotulo}</Badge>}
             {a.descontoFidelidade && <Badge cor="marca" icone={<Tag className="size-3" />}>Fidelidade</Badge>}
           </div>
-          <p className="mt-1.5 truncate font-display text-lg font-medium tracking-wide">{a.servicos.map((s) => s.nome).join(" + ")}</p>
+          <p className="mt-1.5 line-clamp-2 font-display text-lg leading-snug font-medium tracking-wide">{a.servicos.map((s) => s.nome).join(" + ")}</p>
           <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-texto-2">
-            <span className="inline-flex items-center gap-1">
+            <span className="inline-flex items-center gap-1 whitespace-nowrap">
               <Clock className="size-3.5" /> {a.inicio} – {a.fim}
             </span>
             {barbeiro && (
@@ -53,8 +53,13 @@ export function AgendamentoCard({
             )}
           </div>
           <p className="mt-1 text-xs text-texto-3">{formatarDataAmigavel(a.data)} · {descreverPagamento(a)}</p>
+          {/* celular: valor abaixo do conteúdo, para o nome do serviço ter espaço */}
+          <div className="mt-2 flex items-baseline gap-2 sm:hidden">
+            <p className="font-display text-xl font-semibold text-marca">{formatarMoeda(a.valorFinal)}</p>
+            {a.desconto > 0 && <p className="text-xs text-texto-3 line-through">{formatarMoeda(a.valorOriginal)}</p>}
+          </div>
         </div>
-        <div className="shrink-0 text-right">
+        <div className="hidden shrink-0 text-right sm:block">
           {a.desconto > 0 && <p className="text-xs text-texto-3 line-through">{formatarMoeda(a.valorOriginal)}</p>}
           <p className="font-display text-xl font-semibold text-marca">{formatarMoeda(a.valorFinal)}</p>
         </div>

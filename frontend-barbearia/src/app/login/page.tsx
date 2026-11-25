@@ -61,7 +61,7 @@ export default function PaginaLogin() {
     setForm((f) => ({ ...f, [k]: k === "telefone" ? formatarTelefone(e.target.value) : e.target.value }));
 
   return (
-    <div className="grid min-h-dvh lg:grid-cols-[1.1fr_1fr]">
+    <div className="grid grid-cols-1 min-h-dvh lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
       {/* Painel minimalista (desktop) */}
       <div className="fundo-grade relative hidden flex-col justify-center gap-20 overflow-hidden border-r border-borda p-12 lg:flex">
         <div className="grid w-fit grid-cols-3 gap-3" aria-hidden>
@@ -99,7 +99,7 @@ export default function PaginaLogin() {
           <p className="mt-1 text-sm text-texto-2">Protótipo de demonstração — todos os dados são fictícios.</p>
 
           {/* Atalhos demo */}
-          <div className="mt-6 grid gap-3 sm:grid-cols-2">
+          <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
             <button
               onClick={() => demo("cliente")}
               disabled={!!carregando}

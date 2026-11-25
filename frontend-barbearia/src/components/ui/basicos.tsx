@@ -149,14 +149,14 @@ export function Segmentado<T extends string>({
   className?: string;
 }) {
   return (
-    <div className={`inline-flex rounded-xl border border-borda bg-painel-2 p-1 ${className}`} role="tablist">
+    <div className={`sem-scroll inline-flex max-w-full overflow-x-auto rounded-xl border border-borda bg-painel-2 p-1 ${className}`} role="tablist">
       {opcoes.map((o) => (
         <button
           key={o.valor}
           role="tab"
           aria-selected={valor === o.valor}
           onClick={() => aoMudar(o.valor)}
-          className={`flex-1 rounded-lg px-3 py-1.5 text-sm font-medium whitespace-nowrap transition ${
+          className={`flex-1 rounded-lg px-2.5 py-1.5 text-[13px] font-medium whitespace-nowrap transition sm:px-3 sm:text-sm ${
             valor === o.valor ? "bg-marca-escuro text-white shadow" : "text-texto-2 hover:text-texto"
           }`}
         >

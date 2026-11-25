@@ -41,7 +41,7 @@ export default function PaginaServicos() {
         }
       />
       {!servicos ? (
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
           {Array.from({ length: 6 }, (_, i) => (
             <Skeleton key={i} className="h-52" />
           ))}
@@ -49,7 +49,7 @@ export default function PaginaServicos() {
       ) : servicos.length === 0 ? (
         <EstadoVazio icone={<Scissors className="size-6" />} titulo="Nenhum serviço" acao={<Botao onClick={() => setEditando({ ...VAZIO })}>Cadastrar o primeiro</Botao>} />
       ) : (
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
           {servicos.map((s) => (
             <div
               key={s.id}

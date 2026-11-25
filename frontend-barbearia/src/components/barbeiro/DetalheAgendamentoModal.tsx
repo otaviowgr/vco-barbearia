@@ -112,21 +112,21 @@ export function DetalheAgendamentoModal({
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3">
             {barbeiro && <Avatar nome={barbeiro.nome} cor={barbeiro.cor} tamanho={36} />}
             <div className="min-w-0 flex-1 text-sm">
               <p className="text-texto-3">Barbeiro</p>
-              <p className="font-medium">{barbeiro?.nome}</p>
+              <p className="truncate font-medium">{barbeiro?.nome}</p>
             </div>
             {cliente && (
-              <div className="flex gap-2">
-                <a href={linkWhatsApp(cliente.telefone, mensagemWhatsApp(a, cliente, barbeiro))} target="_blank" rel="noopener noreferrer">
-                  <Botao tamanho="sm" variante="secundario" icone={<IconeWhatsApp className="size-4" />}>
+              <div className="grid w-full grid-cols-2 gap-2 sm:flex sm:w-auto">
+                <a href={linkWhatsApp(cliente.telefone, mensagemWhatsApp(a, cliente, barbeiro))} target="_blank" rel="noopener noreferrer" className="min-w-0">
+                  <Botao tamanho="sm" largura="total" variante="secundario" icone={<IconeWhatsApp className="size-4" />}>
                     WhatsApp
                   </Botao>
                 </a>
-                <a href={`tel:${cliente.telefone.replace(/\D/g, "")}`}>
-                  <Botao tamanho="sm" variante="secundario" icone={<Phone className="size-4" />}>
+                <a href={`tel:${cliente.telefone.replace(/\D/g, "")}`} className="min-w-0">
+                  <Botao tamanho="sm" largura="total" variante="secundario" icone={<Phone className="size-4" />}>
                     Ligar
                   </Botao>
                 </a>

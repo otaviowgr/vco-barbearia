@@ -27,7 +27,8 @@ export function RestaurarDemo() {
         )}
       </p>
       <Botao className="mt-4" variante="perigo" onClick={() => setAberto(true)} icone={<DatabaseBackup className="size-4" />}>
-        Restaurar dados da demonstração
+        <span className="sm:hidden">Restaurar dados</span>
+        <span className="hidden sm:inline">Restaurar dados da demonstração</span>
       </Botao>
       <Confirmar
         aberto={aberto}

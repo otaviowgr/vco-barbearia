@@ -40,7 +40,7 @@ export default function PaginaEquipe() {
           </Botao>
         }
       />
-      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
         {!barbeiros
           ? Array.from({ length: 3 }, (_, i) => <Skeleton key={i} className="h-48" />)
           : barbeiros.map((b) => (
@@ -60,8 +60,8 @@ export default function PaginaEquipe() {
                   </div>
                 </div>
                 <p className="mt-3 line-clamp-2 text-sm text-texto-2">{b.bio}</p>
-                <div className="mt-4 flex items-center gap-2 border-t border-borda pt-3">
-                  <span className="flex items-center gap-1 text-xs text-texto-3">
+                <div className="mt-4 flex flex-wrap items-center gap-2 border-t border-borda pt-3">
+                  <span className="flex items-center gap-1 text-xs whitespace-nowrap text-texto-3">
                     <Phone className="size-3.5" /> {b.telefone}
                   </span>
                   <div className="ml-auto flex items-center gap-2">
@@ -121,7 +121,7 @@ function FormBarbeiro({ inicial, aoFechar }: { inicial: BarbeiroForm; aoFechar: 
       </Campo>
       <div>
         <span className="mb-1.5 block text-xs font-medium tracking-wide text-texto-2 uppercase">Cor na agenda</span>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2.5 p-1.5">
           {CORES.map((c) => (
             <button
               type="button"

@@ -105,7 +105,7 @@ function Form({
   };
 
   return (
-    <div className="grid gap-5 md:grid-cols-2">
+    <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
       <div className="space-y-4">
         {novoCliente ? (
           <div className="space-y-3 rounded-xl border border-marca/30 bg-marca/5 p-3">

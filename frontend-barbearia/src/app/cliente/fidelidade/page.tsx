@@ -32,7 +32,7 @@ export default function PaginaFidelidade() {
         </Link>
       )}
 
-      <div className="grid gap-3 sm:grid-cols-3">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
         {[
           { icone: Scissors, titulo: "Atenda-se", texto: "Cada atendimento concluído conta 1 ponto." },
           { icone: Gift, titulo: `A cada ${p?.meta ?? 5}`, texto: `Você ganha ${p?.percentual ?? 20}% de desconto no próximo agendamento.` },
